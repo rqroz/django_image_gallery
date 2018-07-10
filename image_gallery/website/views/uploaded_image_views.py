@@ -4,7 +4,7 @@ from website.models import UploadedImage
 @method_decorator(login_required, name='dispatch')
 class UploadedImageView(CreateView):
     model = UploadedImage
-    fields = ['upload']
+    fields = ['upload', 'date_taken']
     template_name = 'website/user_uploads.html'
     success_url = reverse_lazy('website:upload_img_view')
 

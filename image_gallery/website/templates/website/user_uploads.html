@@ -1,11 +1,14 @@
 {% extends 'website/base/base.html' %}
 {% block title %} User Uploads {% endblock %}
 {% block content %}
-
+{% load static %}
+<link href="{% static 'website/css/libs/jquery-ui.min.css' %}?v=1.10" rel="stylesheet">
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Submit</button>
+  <div class="form-group text-right">
+    <button type="submit" class="btn btn-danger">Submit</button>
+  </div>
 </form>
 
 <table>
@@ -20,7 +23,7 @@
     {% for ui in uploaded_images %}
       <tr>
         <td><a href="{{ ui.upload.url }}" target="_blank">{{ ui.get_filename }}</a></td>
-        <td>{{ ui.date }}</td>
+        <td>{{ ui.uploaded_on }}</td>
         <td>{{ ui.upload.size|filesizeformat }}</td>
       </tr>
     {% empty %}
@@ -30,5 +33,6 @@
     {% endfor %}
   </tbody>
 </table>
-
+<script src="{% static 'website/js/libs/jquery-ui.min.js' %}?version=1.1"></script>
+<script src="{% static 'website/js/user_uploads.js' %}?version=1.1"></script>
 {% endblock %}

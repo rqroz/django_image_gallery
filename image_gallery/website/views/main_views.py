@@ -17,8 +17,12 @@ class IndexView(View):
 class AuthView(View):
     template_name = 'website/login.html'
     form = LoginForm
+    success_url = reverse_lazy('website:index_view')
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(request.META['HTTP_REFERER'])
+
         context = { 'form': self.form() }
         return render(request, self.template_name, context)
 
@@ -32,9 +36,9 @@ class AuthView(View):
             if user is not None:
                 login(request, user)
                 nextt = request.GET.get('next')
-                return redirect(nextt) if nextt else redirect(reverse_lazy('website:index_view'))
+                return redirect(nextt) if nextt else redirect(self.success_url)
             else:
-                messages.error(request, 'There is no such user, please check the information provided.')
+                messages.error(request, 'Could not find a user matching your credentials.<br/>Please double check the information provided.')
 
         context = { 'form': login_form }
         return render(request, self.template_name, context)

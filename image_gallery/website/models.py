@@ -19,7 +19,8 @@ class UploadedImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     upload = models.ImageField(upload_to=url_gallery_img)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
-    date = models.DateTimeField(auto_now_add=True, editable=False)
+    uploaded_on = models.DateTimeField(auto_now_add=True, editable=False)
+    date_taken = models.DateField()
 
     def __str__(self):
         return "%s uploaded %s"%(self.user.username, self.get_filename())
