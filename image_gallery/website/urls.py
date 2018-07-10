@@ -5,7 +5,14 @@ from .views import *
 
 app_name = 'website'
 urlpatterns = [
-    path('', IndexView.as_view(), name='index_view'),
-    path('img/', UploadedImageView.as_view(), name='upload_img_view'),
+    # AUTH
     path('login/', AuthView.as_view(), name='login_view'),
+    path('logout/', logout_view, name='logout_view'),
+
+    # Home Page
+    path('', IndexView.as_view(), name='index_view'),
+
+    # 
+    path('img/', UploadedImageView.as_view(), name='upload_img_view'),
+
 ]

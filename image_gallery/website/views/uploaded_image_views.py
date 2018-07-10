@@ -5,7 +5,7 @@ from website.models import UploadedImage
 class UploadedImageView(CreateView):
     model = UploadedImage
     fields = ['upload']
-    template_name = 'website/test.html'
+    template_name = 'website/user_uploads.html'
     success_url = reverse_lazy('website:upload_img_view')
 
     def form_valid(self, form):
@@ -14,6 +14,6 @@ class UploadedImageView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(UploadedImageView, self).get_context_data(**kwargs)
-        uploads = UploadedImage.objects.all()
+        uploads = UploadedImage.objects.filter(user=self.request.user)
         context['uploaded_images'] = uploads
         return context

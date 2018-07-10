@@ -1,0 +1,17 @@
+#wait-modal > .modal-dialog {
+  margin: calc(100vh/2 - 100px) auto !important;
+}
+
+.footer {
+  background-color: #FFFFFF;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+.footer .copyright {
+  color: #666;
+  padding: 10px 15px;
+  margin: 15px 3px;
+  line-height: 20px;
+  text-align: center;
+}

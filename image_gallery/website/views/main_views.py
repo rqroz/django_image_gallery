@@ -1,5 +1,6 @@
-from .modules import View, render, redirect, reverse_lazy, login_required, messages
+from .modules import View, render, redirect, reverse_lazy, method_decorator, login_required, csrf_protect, messages
 from website.forms import LoginForm
+from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
@@ -12,6 +13,7 @@ class IndexView(View):
 
         return render(request, self.template_name)
 
+@method_decorator(csrf_protect, name='dispatch')
 class AuthView(View):
     template_name = 'website/login.html'
     form = LoginForm
@@ -23,8 +25,9 @@ class AuthView(View):
     def post(self, request, *args, **kwargs):
         login_form = self.form(request.POST)
 
-
         if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -39,4 +42,4 @@ class AuthView(View):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect(index)
+    return redirect(reverse_lazy('website:index_view'))
