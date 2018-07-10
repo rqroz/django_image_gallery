@@ -20,8 +20,7 @@ class AuthView(View):
     success_url = reverse_lazy('website:index_view')
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect(request.META['HTTP_REFERER'])
+        if request.user.is_authenticated: return redirect(self.success_url)
 
         context = { 'form': self.form() }
         return render(request, self.template_name, context)
