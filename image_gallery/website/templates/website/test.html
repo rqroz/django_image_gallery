@@ -15,7 +15,7 @@
   <tbody>
     {% for ui in uploaded_images %}
       <tr>
-        <td><a href="{{ ui.upload.url }}" target="_blank">{{ ui.upload.name }}</a></td>
+        <td><a href="{{ ui.upload.url }}" target="_blank">{{ ui.get_filename }}</a></td>
         <td>{{ ui.date }}</td>
         <td>{{ ui.upload.size|filesizeformat }}</td>
       </tr>

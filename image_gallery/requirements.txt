@@ -2,3 +2,5 @@ Django>=2.0
 boto3
 django-storages
 python-decouple
+psycopg2
+Pillow
