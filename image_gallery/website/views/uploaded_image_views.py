@@ -16,6 +16,7 @@ from PIL import Image, ExifTags
 from io import BytesIO
 import os
 
+@method_decorator(login_required, name='dispatch')
 class UserImagesView(SingleObjectMixin, ListView):
     paginate_by = 10
     template_name = "website/user/uploads.html"

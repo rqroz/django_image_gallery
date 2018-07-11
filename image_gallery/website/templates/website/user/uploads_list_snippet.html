@@ -4,9 +4,7 @@
     <div id="cards-container">
     {% for ui in page_obj %}
       <div class="item">
-        <div class="item-top thumbnail-container" style="background-image:url('{{ ui.thumbnail.url }}')">
-          <div class="zoom-container clickable"><a data-target="{{ui.upload.url}}"><span class="fas fa-search"></span></a></div>
-        </div>
+        {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-top' %}
         <div class="item-bottom">
           {% if same_user %}
               <p href="#" class="item-bottom-content {{ui.status|get_status_class}}">

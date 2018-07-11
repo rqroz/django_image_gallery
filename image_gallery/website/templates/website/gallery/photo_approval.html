@@ -1,0 +1,49 @@
+{% extends 'website/base/logged_base.html' %}
+{% block title %} Photo Approval {% endblock %}
+{% load static %}
+{% load website_template_tags %}
+
+{% block header_content %}
+<link href="{% static 'website/css/photo_approval.css' %}?v=1.11" rel="stylesheet">
+<div class="row">
+  <div class="col-md-12">
+    <div class="header-title">
+      Photo Approval
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body_content %}
+<div class="row">
+  <div class="col-md-12">
+    {% if page_obj %}
+      <div class="list-group">
+      {% for ui in page_obj %}
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-md-3">
+              {% include 'website/base/thumbnail_container_snippet.html' with custom_class='photo-container' %}
+            </div>
+            <div class="col-md-3">
+              
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-data">
+        <p class="text-center">There are no photos to approve.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% if page_obj %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    {% include 'website/base/paginator.html'%}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

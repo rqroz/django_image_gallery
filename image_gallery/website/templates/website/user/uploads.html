@@ -1,85 +1,70 @@
-{% extends 'website/base/base.html' %}
+{% extends 'website/base/logged_base.html' %}
 {% block title %} User Uploads {% endblock %}
-{% block content %}
 {% load static %}
 {% load website_template_tags %}
-<link href="{% static 'website/third-party/jquery-ui/jquery-ui.min.css' %}?v=1.10" rel="stylesheet">
-<link href="{% static 'website/css/gallery.css' %}?v=1.11" rel="stylesheet">
-<div class="section section-header">
-  <div class="section-curtain full-height">
-    <div class="container full-height">
-      <div class="row full-height">
-        <div class="col-md-12 section-content">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="header-title">
-                {% if same_user %}
-                  My Uploads
-                {% else %}
-                  {{user.first_name}}'s Uploads
-                {% endif %}
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="pull-right">
-                <div class="statistics-container">
-                  <dl class="dl-horizontal">
-                    <dt>Total Uploads</dt>
-                    <dd>{{object|get_total_uploads}}</dd>
-                    <dt>Uploads Accepted</dt>
-                    <dd>{{object|get_status_uploads:"Accepted"}}</dd>
-                    <dt>Uploads Refused</dt>
-                    <dd>{{object|get_status_uploads:"Refused"}}</dd>
-                    <dt>Uploads Pending</dt>
-                    <dd>{{object|get_status_uploads:"Pending"}}</dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </div>
+
+{% block header_content %}
+  <link href="{% static 'website/third-party/jquery-ui/jquery-ui.min.css' %}?v=1.10" rel="stylesheet">
+  <link href="{% static 'website/css/gallery.css' %}?v=1.11" rel="stylesheet">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="header-title">
+        {% if same_user %}
+          My Uploads
+        {% else %}
+          {{user.first_name}}'s Uploads
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="pull-right">
+        <div class="statistics-container">
+          <dl class="dl-horizontal">
+            <dt>Total Uploads</dt>
+            <dd>{{object|get_total_uploads}}</dd>
+            <dt>Uploads Accepted</dt>
+            <dd>{{object|get_status_uploads:"Accepted"}}</dd>
+            <dt>Uploads Refused</dt>
+            <dd>{{object|get_status_uploads:"Refused"}}</dd>
+            <dt>Uploads Pending</dt>
+            <dd>{{object|get_status_uploads:"Pending"}}</dd>
+          </dl>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="section body-section">
-  <div class="container">
+{% endblock %}
+{% block body_content %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="row">
-          <div clas="col-md-12">
-            <h3 class="text-center">Upload New Image</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div clas="col-md-12">
-            {% include 'website/forms/upload_form.html' with form=upload_form %}
-          </div>
-        </div>
+      <div clas="col-md-12">
+        <h3 class="text-center">Upload New Image</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div clas="col-md-12">
+        {% include 'website/forms/upload_form.html' with form=upload_form %}
       </div>
     </div>
   </div>
 </div>
 <hr/>
-<div class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4 text-center">
-        <form id="status-form" method="get">
-          {% include "website/forms/form_snippet.html" with form=status_form %}
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        {% include 'website/user/uploads_list_snippet.html'%}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 text-center">
-        {% include 'website/base/paginator.html'%}
-      </div>
-    </div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 text-center">
+    <form id="status-form" method="get">
+      {% include "website/forms/form_snippet.html" with form=status_form %}
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    {% include 'website/user/uploads_list_snippet.html'%}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    {% include 'website/base/paginator.html'%}
   </div>
 </div>
 <script src="{% static 'website/third-party/jquery-ui/jquery-ui.min.js' %}?version=1.1"></script>

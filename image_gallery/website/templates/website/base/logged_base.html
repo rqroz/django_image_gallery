@@ -1,0 +1,22 @@
+{% extends 'website/base/base.html' %}
+{% block title %} User Uploads {% endblock %}
+{% block content %}
+<div class="section section-header">
+  <div class="section-curtain full-height">
+    <div class="container full-height">
+      <div class="row full-height">
+        <div class="col-md-12 section-content">
+          {% block header_content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section body-section">
+  <div class="container">
+    {% block body_content %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

@@ -14,7 +14,7 @@
     <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
     <li><a href="{% url 'website:user_gallery_view' request.user.pk %}"><i class="fas fa-images"></i>My Uploads</a></li>
     {% if request.user|is_manager %}
-    <li><a href="#"><i class="fas fa-clipboard-check"></i>Approve Photos</a></li>
+    <li><a href="{% url 'website:photo_approval_view' %}"><i class="fas fa-clipboard-check"></i>Approve Photos</a></li>
     {% endif %}
     <li role="separator" class="divider"></li>
     <li><a href="{% url 'website:logout_view' %}"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
