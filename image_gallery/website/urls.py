@@ -14,5 +14,4 @@ urlpatterns = [
 
     #
     path('uploads/<int:pk>/', UserImagesView.as_view(), name='user_gallery_view'),
-    path('uploads/<int:pk>/upload/', UploadImageView.as_view(), name='upload_img_view'),
 ]

@@ -1,6 +1,6 @@
 from .modules import login_required, method_decorator, reverse_lazy, redirect, render, messages
 from website.models import UploadedImage
-from website.forms import UploadedImageForm
+from website.forms import UploadedImageForm, UploadStatusForm
 from website.helper import is_user_a_manager
 
 
@@ -16,9 +16,41 @@ from PIL import Image, ExifTags
 from io import BytesIO
 import os
 
-@method_decorator(login_required, name='dispatch')
-class UploadImageView(View):
+class UserImagesView(SingleObjectMixin, ListView):
+    paginate_by = 10
+    template_name = "website/user/uploads.html"
     form = UploadedImageForm
+    status = UploadedImage.PENDING
+    status_form = UploadStatusForm
+
+    def replace_status(self, temp_status):
+        if temp_status is None: return
+        if temp_status == UploadedImage.ACCEPTED:
+            self.status = UploadedImage.ACCEPTED
+        elif temp_status == UploadedImage.REFUSED:
+            self.status = UploadedImage.REFUSED
+        elif temp_status == UploadedImage.PENDING:
+            self.status = UploadedImage.PENDING
+
+    def get(self, request, *args, **kwargs):
+        self.user_pk = kwargs.get('pk')
+        if is_user_a_manager(request.user) or self.user_pk == request.user.pk:
+            self.replace_status(request.GET.get('status'))
+            self.object = get_object_or_404(User, pk=kwargs.get('pk'))
+            return super().get(request, *args, **kwargs)
+        else:
+            raise Http404()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.object
+        context['upload_form'] = self.form()
+        context['status_form'] = self.status_form(initial={'status':self.status})
+        context['same_user'] = self.request.user.pk == self.user_pk
+        return context
+
+    def get_queryset(self):
+        return self.object.uploadedimage_set.filter(status=self.status).order_by('-date_taken')
 
     def get_proper_dimensions(self, width, height, max=600):
         ratio = min(max/width, max/height)
@@ -66,8 +98,8 @@ class UploadImageView(View):
         form = self.form(request.POST, request.FILES)
         context = {'success': False}
         print("form is valid? %s"%form.is_valid())
-        print("form fields: %s"%form.fields)
-        print(form)
+        print("form erros: %s"%form.errors)
+        print(form.fields)
         if form.is_valid():
             form.instance.user = self.request.user
             original_width, original_height = form.instance.upload.width, form.instance.upload.height
@@ -77,30 +109,5 @@ class UploadImageView(View):
             thumbnail_name = "%s-thumbnail.jpg"%(upload_name)
             form.instance.thumbnail.save(thumbnail_name, low_quality_img)
             form.save()
-            context['success'] = True
 
-        return JsonResponse(context)
-
-
-class UserImagesView(SingleObjectMixin, ListView):
-    paginate_by = 10
-    template_name = "website/user/uploads.html"
-    form = UploadedImageForm
-
-    def get(self, request, *args, **kwargs):
-        self.user_pk = kwargs.get('pk')
-        if is_user_a_manager(request.user) or self.user_pk == request.user.pk:
-            self.object = get_object_or_404(User, pk=kwargs.get('pk'))
-            return super().get(request, *args, **kwargs)
-        else:
-            raise Http404()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.object
-        context['upload_form'] = self.form()
-        context['same_user'] = self.request.user.pk == self.user_pk
-        return context
-
-    def get_queryset(self):
-        return self.object.uploadedimage_set.all().order_by('-date_taken')
+        return redirect(reverse_lazy('website:user_gallery_view', kwargs={'pk': request.user.pk}))

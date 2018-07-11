@@ -27,3 +27,13 @@ class UploadedImageForm(forms.ModelForm):
     class Meta:
         model = UploadedImage
         fields = ('upload', 'date_taken')
+
+class UploadStatusForm(forms.ModelForm):
+    class Meta:
+        model = UploadedImage
+        fields = ('status',)
+
+    def __init__(self, *args, **kwargs):
+        super(UploadStatusForm, self).__init__(*args, **kwargs)
+        self.fields['status'].choices = UploadedImage.STATUS_CHOICES
+        self.fields['status'].widget.attrs.update({'class':'form-control'})
