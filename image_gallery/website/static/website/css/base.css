@@ -280,6 +280,7 @@ form input {
   position: relative;
   width: 100%;
   height: 60vh;
+  text-align: center;
 }
 
 .no-data p {

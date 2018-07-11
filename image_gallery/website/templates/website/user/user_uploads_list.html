@@ -1,19 +1,23 @@
 {% load website_template_tags %}
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <div id="cards-container" class="free-wall">
-    {% for ui in page_obj %}
-      <div class="item">
-        {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-top' %}
-        <div class="item-bottom">
-          <p href="#" class="item-bottom-content status-{{ui.status|get_status_class}}">
-            {{ui.status}}
-          </p>
+    {% if page_obj %}
+      <div id="cards-container" class="free-wall">
+      {% for ui in page_obj %}
+        <div class="item">
+          {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-top' %}
+          <div class="item-bottom">
+            <p href="#" class="item-bottom-content status-{{ui.status|get_status_class}}">
+              {{ui.status}}
+            </p>
+          </div>
         </div>
+      {% endfor %}
+    {% else %}
+      <div class="no-data">
+        <p>There are no {{status_filter|lower}} photos yet...</p>
       </div>
-    {% empty %}
-      <p>{% if same_user %} You {% else %} This user {% endif %} have not uploaded any photo yet...</p>
-    {% endfor %}
+    {% endif %}
   </div>
   </div>
 </div>
