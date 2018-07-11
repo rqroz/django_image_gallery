@@ -41,6 +41,30 @@ $(function(){
     }
   });
 
+  $(".free-wall").each(function(){
+    let wall = new Freewall($(this));
+    wall.reset({
+      selector: '.item',
+      cellW: function(container) {
+        var cellWidth = 250;
+        return cellWidth;
+      },
+      cellH: function(container) {
+        var cellHeight = 250;
+        return cellHeight;
+      },
+      fixSize: 0,
+      gutterY: 20,
+      gutterX: 20,
+      onResize: function() {
+        wall.fitWidth();
+      }
+    })
+    wall.fitWidth();
+  })
+
+  $(window).trigger("resize");
+
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 })

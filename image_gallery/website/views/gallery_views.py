@@ -5,7 +5,16 @@ from website.helper import is_user_a_manager
 from website.website_decorators import manager_only
 from django.http import Http404, JsonResponse
 
-from .main_views import StatusView
+from .main_views import StatusView, ListView
+
+@method_decorator([login_required], name='dispatch')
+class GalleryView(ListView):
+    paginate_by = 100
+    template_name = 'website/gallery/gallery.html'
+
+    def get_queryset(self):
+        return UploadedImage.objects.filter(status=UploadedImage.ACCEPTED).order_by('-uploaded_on')
+
 
 @method_decorator([login_required, csrf_protect, manager_only], name='dispatch')
 class PhotoApprovalView(StatusView):

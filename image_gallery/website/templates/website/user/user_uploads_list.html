@@ -1,7 +1,7 @@
 {% load website_template_tags %}
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <div id="cards-container">
+    <div id="cards-container" class="free-wall">
     {% for ui in page_obj %}
       <div class="item">
         {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-top' %}

@@ -275,3 +275,18 @@ form input {
 .pagination * {
   color: #333 !important;
 }
+
+.no-data {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+}
+
+.no-data p {
+  position: absolute;
+  width: 100%;
+  font-size: 2.5em;
+  font-weight: 100;
+  top: 50%;
+  margin-top: -25px;
+}

@@ -1,0 +1,43 @@
+{% extends 'website/base/logged_base.html' %}
+{% block title %} Photo Approval {% endblock %}
+{% load static %}
+{% load website_template_tags %}
+
+{% block header_content %}
+<link href="{% static 'website/css/gallery.css' %}?v=1.0" rel="stylesheet">
+<div class="row">
+  <div class="col-md-12">
+    <div class="header-title">
+      Gallery
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body_content %}
+<div class="row">
+  <div class="col-md-12">
+    {% if page_obj %}
+      <div class="free-wall">
+        {% for ui in page_obj %}
+          <div class="item">
+            {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-full' %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-data">
+        <p class="text-center">There are no photos yet.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% if page_obj %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    {% include 'website/base/paginator.html' %}
+  </div>
+</div>
+<script src="{% static 'website/third-party/freewall/freewall.js' %}?version=1.1"></script>
+{% endif %}
+{% endblock %}
