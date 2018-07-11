@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from django.contrib.auth.models import User
 from django.db.models import Q
+from website.models import UserData
 
 class AnonymousFormView(View):
     form = None
@@ -30,6 +31,8 @@ class AuthView(AnonymousFormView):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                if not UserData.objects.filter(user=user).exists():
+                    UserData.objects.create(user=user)
                 nextt = request.GET.get('next')
                 return redirect(nextt) if nextt else redirect(self.success_url)
             else:
