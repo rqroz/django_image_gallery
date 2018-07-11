@@ -18,7 +18,7 @@ import os
 
 @method_decorator([login_required, csrf_protect], name='dispatch')
 class UserImagesView(SingleObjectMixin, StatusView):
-    template_name = "website/user/uploads.html"
+    template_name = "website/user/user_uploads.html"
     form = UploadedImageForm
 
     def get(self, request, *args, **kwargs):
