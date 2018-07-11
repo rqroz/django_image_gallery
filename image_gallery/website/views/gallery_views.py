@@ -1,11 +1,10 @@
-from .modules import login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages, get_object_or_404
+from .modules import ListView, login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages, get_object_or_404, manager_only
 from website.models import UploadedImage
 from website.forms import UploadStatusForm
 from website.helper import is_user_a_manager
-from website.website_decorators import manager_only
 from django.http import Http404, JsonResponse
 
-from .main_views import StatusView, ListView
+from .main_views import StatusView
 
 @method_decorator([login_required], name='dispatch')
 class GalleryView(ListView):

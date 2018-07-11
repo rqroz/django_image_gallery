@@ -1,4 +1,4 @@
-from .modules import login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages
+from .modules import ListView, View, login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages
 from website.models import UploadedImage
 from website.forms import UploadedImageForm, UploadStatusForm
 from website.helper import is_user_a_manager
@@ -8,7 +8,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.http import Http404, JsonResponse
 
-from django.views.generic import ListView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import ModelFormMixin
 from django.core.files.base import ContentFile

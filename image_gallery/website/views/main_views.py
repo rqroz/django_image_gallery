@@ -1,8 +1,5 @@
-from .modules import render, redirect, reverse_lazy, method_decorator, login_required, csrf_protect, messages
-from django.views import View
-from django.views.generic import ListView
+from .modules import ListView, View, render, redirect, reverse_lazy, method_decorator, login_required, csrf_protect, messages, manager_only
 from website.forms import UploadStatusForm, UploadedImage
-from website.website_decorators import manager_only
 from django.contrib.auth.models import User
 from django.db.models import Q
 

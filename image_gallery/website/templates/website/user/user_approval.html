@@ -1,0 +1,68 @@
+{% extends 'website/base/logged_base.html' %}
+{% block title %} User Approval {% endblock %}
+{% load static %}
+{% load website_template_tags %}
+
+{% block header_content %}
+<link href="{% static 'website/css/gallery.css' %}?v=1.0" rel="stylesheet">
+<div class="row">
+  <div class="col-md-12">
+    <div class="header-title">
+      User Approval
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body_content %}
+<div class="row">
+  <div class="col-md-12">
+    {% if page_obj %}
+      <form id="user-approval-form" method="post">
+        {% csrf_token %}
+        <div class="list-group">
+            {% for u in page_obj %}
+              <div class="list-group-item">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="requested-user-name">{{u.first_name}}&nbsp;{{u.last_name}}</div>
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <div class="requested-user-name">Requested in {{u.date_joined}}</div>
+                  </div>
+                  <div class="col-md-4 text-right">
+                    <div class="btn-group user-active-group" data-toggle="buttons">
+                      <label class="btn btn-success">
+                        <input type="radio" name="{{u.pk}}" value="Accepted"> Accept
+                      </label>
+                      <label class="btn btn-danger">
+                        <input type="radio" name="{{u.pk}}" value="Refused"> Deny
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="row" style="padding-top:20px;">
+              <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-default"><i class="fas fa-save"></i>&nbsp;Save</button>
+              </div>
+            </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="no-data">
+        <p class="text-center">There are no new requests.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% if page_obj %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    {% include 'website/base/paginator.html' %}
+  </div>
+</div>
+<script src="{% static 'website/third-party/freewall/freewall.js' %}?version=1.1"></script>
+{% endif %}
+{% endblock %}

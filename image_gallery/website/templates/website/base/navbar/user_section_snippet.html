@@ -15,6 +15,7 @@
     <li><a href="{% url 'website:user_uploads_view' request.user.pk %}"><i class="fas fa-images"></i>My Uploads</a></li>
     {% if request.user|is_manager %}
     <li><a href="{% url 'website:photo_approval_view' %}"><i class="fas fa-clipboard-check"></i>Approve Photos</a></li>
+    <li><a href="{% url 'website:user_approval_view' %}"><i class="fas fa-hands-helping"></i>Approve Users</a></li>
     {% endif %}
     <li role="separator" class="divider"></li>
     <li><a href="{% url 'website:logout_view' %}"><i class="fas fa-sign-out-alt"></i>Log out</a></li>

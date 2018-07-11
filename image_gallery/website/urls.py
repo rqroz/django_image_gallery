@@ -22,4 +22,7 @@ urlpatterns = [
 
     # Search
     path('search/', SearchView.as_view(), name='search_view'),
+
+    # User
+    path('users/approval/', UserApprovalView.as_view(), name='user_approval_view'),
 ]
