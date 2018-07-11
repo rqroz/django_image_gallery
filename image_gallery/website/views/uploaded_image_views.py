@@ -25,12 +25,10 @@ class UserImagesView(SingleObjectMixin, ListView):
 
     def replace_status(self, temp_status):
         if temp_status is None: return
-        if temp_status == UploadedImage.ACCEPTED:
-            self.status = UploadedImage.ACCEPTED
-        elif temp_status == UploadedImage.REFUSED:
-            self.status = UploadedImage.REFUSED
-        elif temp_status == UploadedImage.PENDING:
-            self.status = UploadedImage.PENDING
+        for key, value in UploadedImage.STATUS_CHOICES:
+            if temp_status == value:
+                self.status = value
+                break
 
     def get(self, request, *args, **kwargs):
         self.user_pk = kwargs.get('pk')
@@ -104,5 +102,7 @@ class UserImagesView(SingleObjectMixin, ListView):
             if is_user_a_manager(form.instance.user):
                 form.instance.status = UploadedImage.ACCEPTED
             form.save()
+        else:
+            messages.error(request, 'Fill the form correctly!<br/>Make sure you have not selected a future date.')
 
         return redirect(reverse_lazy('website:user_gallery_view', kwargs={'pk': request.user.pk}))
