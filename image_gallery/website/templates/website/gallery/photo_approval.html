@@ -4,7 +4,7 @@
 {% load website_template_tags %}
 
 {% block header_content %}
-<link href="{% static 'website/css/photo_approval.css' %}?v=1.0" rel="stylesheet">
+<link href="{% static 'website/css/photo_approval.css' %}?v=1" rel="stylesheet">
 <div class="row">
   <div class="col-md-12">
     <div class="header-title">
@@ -16,7 +16,7 @@
 
 {% block body_content %}
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-10 col-md-offset-1">
     {% if page_obj %}
       <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
@@ -33,10 +33,10 @@
             <div class="col-md-12">
                 <div class="list-group-item {% if forloop.first %}first-list-item{% elif forloop.last %}last-list-item{% endif %}">
                   <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                       {% include 'website/base/thumbnail_container_snippet.html' with custom_class='photo-container' %}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                       <dl class="dl-horizontal">
                         <dt>Uploaded By:</dt>
                         <dd>{{ui.user.first_name}}&nbsp;{{ui.user.last_name}}</dd>
@@ -44,15 +44,28 @@
                         <dd>{{ui.uploaded_on}}</dd>
                         <dt>Date Taken: </dt>
                         <dd>{{ui.date_taken}}</dd>
-                        <dt>Status: </dt>
-                        <dd class="text-{{ui.status|get_status_class}}">{{ui.status}}</dd>
                       </dl>
                     </div>
                     <div class="col-md-5">
-                      <div class="input-group">
-                        <input type="radio" name="{{ui.pk}}" value="Accepted" {% if ui.status == 'Accepted' %}checked{% endif %}> Accepted
-                        <input type="radio" name="{{ui.pk}}" value="Pending" {% if ui.status == 'Pending' %}checked{% endif %}> Pending
-                        <input type="radio" name="{{ui.pk}}" value="Refused" {% if ui.status == 'Refused' %}checked{% endif %}> Refused
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <h4 class="light-text">Change Status</h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <div class="btn-group status-group" data-toggle="buttons">
+                            <label class="btn btn-success {% if ui.status == 'Accepted' %}active{% endif %}">
+                              <input type="radio" name="{{ui.pk}}" value="Accepted" {% if ui.status == 'Accepted' %}checked{% endif %}> Accepted
+                            </label>
+                            <label class="btn btn-warning {% if ui.status == 'Pending' %}active{% endif %}">
+                              <input type="radio" name="{{ui.pk}}" value="Pending" {% if ui.status == 'Pending' %}checked{% endif %}> Pending
+                            </label>
+                            <label class="btn btn-danger {% if ui.status == 'Refused' %}active{% endif %}">
+                              <input type="radio" name="{{ui.pk}}" value="Refused" {% if ui.status == 'Refused' %}checked{% endif %}> Refused
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
