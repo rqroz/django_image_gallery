@@ -302,3 +302,11 @@ form input {
   left: 15px;
   top: 35px;
 }
+
+.nav .request-access-btn {
+  color: #ccc !important;
+}
+
+.nav .request-access-btn:hover, .nav .request-access-btn:active, .nav .request-access-btn:focus  {
+  color: #fff !important;
+}

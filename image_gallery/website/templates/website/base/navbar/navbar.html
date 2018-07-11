@@ -32,6 +32,7 @@
         {% if request.user.is_authenticated %}
           {% include 'website/base/navbar/user_section_snippet.html' %}
         {% else %}
+          <li><a class="request-access-btn" href="{% url 'website:request_access_view' %}"><i class="fas fa-hands-helping"></i>Request Access</a></li>
           <li><a href="{% url 'website:login_view' %}"><i class="fas fa-sign-in-alt"></i>Log in</a></li>
         {% endif %}
       </ul>

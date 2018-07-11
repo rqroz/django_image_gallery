@@ -1,5 +1,5 @@
 from django import forms
-from website.models import UploadedImage
+from website.models import UploadedImage, User
 
 class LoginForm(forms.Form):
     username = forms.EmailField(
@@ -22,6 +22,23 @@ class LoginForm(forms.Form):
                 }
             )
         )
+
+class UserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'password')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'your-email@domain.com'}),
+            'password': forms.PasswordInput(attrs={'placeholder': '**********'}),
+        }
+
 
 class SearchForm(forms.Form):
     search = forms.CharField(

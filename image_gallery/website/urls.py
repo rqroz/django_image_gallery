@@ -7,6 +7,7 @@ app_name = 'website'
 urlpatterns = [
     # AUTH
     path('login/', AuthView.as_view(), name='login_view'),
+    path('request-access/', RequestAcessView.as_view(), name='request_access_view'),
     path('logout/', logout_view, name='logout_view'),
 
     # Home Page
