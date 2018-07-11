@@ -8,12 +8,28 @@
 <div class="section section-header" data-pk="{{user.pk}}">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         {% if same_user %}
           My Uploads
         {% else %}
           {{user.first_name}}'s Uploads
         {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div class="pull-right">
+          <div class="statistics-container">
+            <dl class="dl-horizontal">
+              <dt>Total Uploads</dt>
+              <dd>{{object|get_total_uploads}}</dd>
+              <dt>Uploads Accepted</dt>
+              <dd>{{object|get_status_uploads:"Accepted"}}</dd>
+              <dt>Uploads Refused</dt>
+              <dd>{{object|get_status_uploads:"Refused"}}</dd>
+              <dt>Uploads Pending</dt>
+              <dd>{{object|get_status_uploads:"Pending"}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,10 +37,7 @@
 <div class="section">
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
-
-      </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-md-offset-3">
         <div class="row">
           <div clas="col-md-12">
             <h3 class="text-center">Upload New Image</h3>

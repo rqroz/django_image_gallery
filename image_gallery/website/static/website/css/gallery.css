@@ -15,6 +15,18 @@
   margin-bottom: 20px;
 }
 
+.statistics-container {
+  position: relative;
+  height: 100%;
+}
+
+.statistics-container .dl-horizontal {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  bottom: 10px;
+}
+
 .thumbnail-container {
   width: 100px;
   height: 100px;
