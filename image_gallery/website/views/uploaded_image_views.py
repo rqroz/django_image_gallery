@@ -94,4 +94,4 @@ class UserImagesView(SingleObjectMixin, StatusView):
         else:
             messages.error(request, 'Fill the form correctly!<br/>Make sure you have not selected a future date.')
 
-        return redirect(reverse_lazy('website:user_gallery_view', kwargs={'pk': request.user.pk}))
+        return redirect(reverse_lazy('website:user_uploads_view', kwargs={'pk': request.user.pk}))

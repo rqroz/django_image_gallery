@@ -291,3 +291,14 @@ form input {
   top: 50%;
   margin-top: -25px;
 }
+
+.search-title {
+  line-height: 80px;
+}
+
+.search-title span {
+  font-size: 15px;
+  position: absolute;
+  left: 15px;
+  top: 35px;
+}

@@ -13,9 +13,12 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index_view'),
 
     # UploadedImage Views
-    path('uploads/<int:pk>/', UserImagesView.as_view(), name='user_gallery_view'),
+    path('uploads/<int:pk>/', UserImagesView.as_view(), name='user_uploads_view'),
 
     # Gallery Views
     path('gallery/', GalleryView.as_view(), name='gallery_view'),
     path('gallery/approval/', PhotoApprovalView.as_view(), name='photo_approval_view'),
+
+    # Search
+    path('search/', SearchView.as_view(), name='search_view'),
 ]

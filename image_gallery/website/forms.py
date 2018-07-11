@@ -23,6 +23,17 @@ class LoginForm(forms.Form):
             )
         )
 
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        min_length=1,
+        max_length=100,
+        widget = forms.TextInput(
+            attrs = {
+                'placeholder': 'Search Friends'
+                }
+            )
+        )
+
 class UploadedImageForm(forms.ModelForm):
     class Meta:
         model = UploadedImage

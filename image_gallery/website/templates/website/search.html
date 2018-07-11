@@ -1,14 +1,13 @@
 {% extends 'website/base/logged_base.html' %}
-{% block title %} Gallery {% endblock %}
+{% block title %} Friend's Search {% endblock %}
 {% load static %}
-{% load website_template_tags %}
-
 {% block header_content %}
 <link href="{% static 'website/css/gallery.css' %}?v=1.0" rel="stylesheet">
 <div class="row">
   <div class="col-md-12">
-    <div class="header-title">
-      Gallery
+    <div class="header-title search-title">
+      Friend's Search
+      <span>You searched for '{{request.GET.search}}'</span>
     </div>
   </div>
 </div>
@@ -18,16 +17,21 @@
 <div class="row">
   <div class="col-md-12">
     {% if page_obj %}
-      <div class="free-wall">
-        {% for ui in page_obj %}
-          <div class="item">
-            {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-full' %}
-          </div>
+      <div class="list-group">
+        {% for u in page_obj %}
+          <a href="{% url 'website:user_uploads_view' u.pk %}" class="list-group-item">
+            <div class="row">
+              <div class="col-md-8">{{u.first_name}}&nbsp;{{u.last_name}}</div>
+              <div class="col-md-4 text-right">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </a>
         {% endfor %}
       </div>
     {% else %}
       <div class="no-data">
-        <p class="text-center">There are no photos yet.</p>
+        <p class="text-center">No friends found.</p>
       </div>
     {% endif %}
   </div>

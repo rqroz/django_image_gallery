@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from django.views.generic import ListView
 from website.forms import UploadStatusForm, UploadedImage
+from website.website_decorators import manager_only
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 class IndexView(View):
     template_name = 'website/index.html'
@@ -50,6 +53,16 @@ def logout_view(request):
     logout(request)
     return redirect(reverse_lazy('website:index_view'))
 
+@method_decorator([login_required, manager_only], name='dispatch')
+class SearchView(ListView):
+    template_name = 'website/search.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        return User.objects.filter(
+                                    Q(first_name__contains=search) | Q(last_name__contains=search)
+                                ).exclude(pk=self.request.user.pk).order_by('first_name')
 
 @method_decorator([csrf_protect, login_required], name='dispatch')
 class StatusView(ListView):

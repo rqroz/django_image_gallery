@@ -20,7 +20,7 @@ class GalleryView(ListView):
 class PhotoApprovalView(StatusView):
     template_name = 'website/gallery/photo_approval.html'
     success_url = reverse_lazy('website:photo_approval_view')
-    paginate_by = 2
+    paginate_by = 10
 
     def get_queryset(self):
         return UploadedImage.objects.filter(status=self.status).order_by('-uploaded_on')
