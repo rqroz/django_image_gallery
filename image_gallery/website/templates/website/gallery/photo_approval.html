@@ -26,31 +26,46 @@
         </div>
       </div>
       <div class="approval-list list-group">
-      {% for ui in page_obj %}
-      <div class="row">
-        <div class="col-md-12">
-          <div class="list-group-item {% if forloop.first %}first-list-item{% elif forloop.last %}last-list-item{% endif %}">
-            <div class="row">
-              <div class="col-md-1">
-                {% include 'website/base/thumbnail_container_snippet.html' with custom_class='photo-container' %}
-              </div>
-              <div class="col-md-6">
-                <dl class="dl-horizontal">
-                  <dt>Uploaded By:</dt>
-                  <dd>{{ui.user.first_name}}&nbsp;{{ui.user.last_name}}</dd>
-                  <dt>Uploaded on:</dt>
-                  <dd>{{ui.uploaded_on}}</dd>
-                  <dt>Date Taken: </dt>
-                  <dd>{{ui.date_taken}}</dd>
-                  <dt>Status: </dt>
-                  <dd class="text-{{ui.status|get_status_class}}">{{ui.status}}</dd>
-                </dl>
-              </div>
+        <form id="photo-approval-form" method="post">
+          {% csrf_token %}
+          {% for ui in page_obj %}
+          <div class="row">
+            <div class="col-md-12">
+                <div class="list-group-item {% if forloop.first %}first-list-item{% elif forloop.last %}last-list-item{% endif %}">
+                  <div class="row">
+                    <div class="col-md-1">
+                      {% include 'website/base/thumbnail_container_snippet.html' with custom_class='photo-container' %}
+                    </div>
+                    <div class="col-md-6">
+                      <dl class="dl-horizontal">
+                        <dt>Uploaded By:</dt>
+                        <dd>{{ui.user.first_name}}&nbsp;{{ui.user.last_name}}</dd>
+                        <dt>Uploaded on:</dt>
+                        <dd>{{ui.uploaded_on}}</dd>
+                        <dt>Date Taken: </dt>
+                        <dd>{{ui.date_taken}}</dd>
+                        <dt>Status: </dt>
+                        <dd class="text-{{ui.status|get_status_class}}">{{ui.status}}</dd>
+                      </dl>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="input-group">
+                        <input type="radio" name="{{ui.pk}}" value="Accepted" {% if ui.status == 'Accepted' %}checked{% endif %}> Accepted
+                        <input type="radio" name="{{ui.pk}}" value="Pending" {% if ui.status == 'Pending' %}checked{% endif %}> Pending
+                        <input type="radio" name="{{ui.pk}}" value="Refused" {% if ui.status == 'Refused' %}checked{% endif %}> Refused
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
-        </div>
-      </div>
-      {% endfor %}
+          {% endfor %}
+          <div class="row" style="padding-top:20px;">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-default"><i class="fas fa-save"></i>&nbsp;Save</button>
+            </div>
+          </div>
+      </form>
       </div>
     {% else %}
       <div class="no-data">
@@ -62,7 +77,7 @@
 {% if page_obj %}
 <div class="row">
   <div class="col-md-6 col-md-offset-3 text-center">
-    {% include 'website/base/paginator.html'%}
+    {% include 'website/base/paginator.html' %}
   </div>
 </div>
 {% endif %}

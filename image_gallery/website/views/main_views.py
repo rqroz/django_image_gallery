@@ -72,5 +72,6 @@ class StatusView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['status_filter'] = self.status
         context['status_form'] = self.status_form(initial={'status':self.status})
         return context
