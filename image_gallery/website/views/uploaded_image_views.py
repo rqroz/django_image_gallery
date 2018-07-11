@@ -75,7 +75,6 @@ class UserImagesView(SingleObjectMixin, ListView):
                 elif orientation == 8:
                     degrees = 90
 
-                print("Should rotate %s degrees"%degrees)
                 return image.rotate(degrees, expand=True)
 
         return image
@@ -83,9 +82,7 @@ class UserImagesView(SingleObjectMixin, ListView):
     def create_low_quality_img(self, img_data):
         img = Image.open(img_data)
         img_width, img_height = img.size
-        print("width: %d, height: %d"%(img_width, img_height))
         new_width, new_height = self.get_proper_dimensions(img_width, img_height)
-        print("new_width: %d, new_height: %d"%(new_width, new_height))
 
         img.thumbnail((new_width, new_height))
         img_bytes = BytesIO()
@@ -97,17 +94,15 @@ class UserImagesView(SingleObjectMixin, ListView):
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST, request.FILES)
         context = {'success': False}
-        print("form is valid? %s"%form.is_valid())
-        print("form erros: %s"%form.errors)
-        print(form.fields)
+
         if form.is_valid():
             form.instance.user = self.request.user
-            original_width, original_height = form.instance.upload.width, form.instance.upload.height
-            print("original width: %d, original height: %d"%(original_width, original_height))
             low_quality_img = self.create_low_quality_img(form.instance.upload.file)
             upload_name = os.path.splitext(form.instance.upload.name)[0]
             thumbnail_name = "%s-thumbnail.jpg"%(upload_name)
             form.instance.thumbnail.save(thumbnail_name, low_quality_img)
+            if is_user_a_manager(form.instance.user):
+                form.instance.status = UploadedImage.ACCEPTED
             form.save()
 
         return redirect(reverse_lazy('website:user_gallery_view', kwargs={'pk': request.user.pk}))
