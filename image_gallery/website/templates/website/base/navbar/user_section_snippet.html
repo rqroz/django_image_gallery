@@ -1,0 +1,22 @@
+{% load static %}
+{% load website_template_tags %}
+<li class="dropdown">
+  <a href="#" class="user-dropdown-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    {% if request.user.details.photo %}
+    <img src="/media/{{request.user.details.photo}}" class="nav-user-img" alt="Foto de perfil"></img>
+    {% else %}
+    <img src="{% static 'website/img/default_user_icon.png' %}" class="nav-user-img" alt="Foto de perfil"></img>
+    {% endif %}
+    &nbsp;{{ request.user.first_name }}
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="#"><i class="fas fa-user"></i>&nbsp;&nbsp;Profile</a></li>
+    <li><a href="{% url 'website:upload_img_view'%}"><i class="fas fa-images"></i>&nbsp;My Uploads</a></li>
+    {% if request.user|is_manager %}
+    <li><a href="#"><i class="fas fa-clipboard-check"></i>&nbsp;&nbsp;&nbsp;Approve Photos</a></li>
+    {% endif %}
+    <li role="separator" class="divider"></li>
+    <li><a href="{% url 'website:logout_view' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Log out</a></li>
+  </ul>
+</li>

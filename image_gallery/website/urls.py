@@ -12,7 +12,7 @@ urlpatterns = [
     # Home Page
     path('', IndexView.as_view(), name='index_view'),
 
-    # 
-    path('img/', UploadedImageView.as_view(), name='upload_img_view'),
+    #
+    path('uploads/', UploadedImageView.as_view(), name='upload_img_view'),
 
 ]

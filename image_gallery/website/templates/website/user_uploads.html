@@ -2,6 +2,7 @@
 {% block title %} User Uploads {% endblock %}
 {% block content %}
 {% load static %}
+{% load website_template_tags %}
 <link href="{% static 'website/css/libs/jquery-ui.min.css' %}?v=1.10" rel="stylesheet">
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
@@ -14,6 +15,7 @@
 <table>
   <thead>
     <tr>
+      <ht>Image</ht>
       <th>Name</th>
       <th>Uploaded at</th>
       <th>Size</th>
@@ -22,6 +24,7 @@
   <tbody>
     {% for ui in uploaded_images %}
       <tr>
+        <td><img src="{{ ui.sample.url }}"></img></td>
         <td><a href="{{ ui.upload.url }}" target="_blank">{{ ui.get_filename }}</a></td>
         <td>{{ ui.uploaded_on }}</td>
         <td>{{ ui.upload.size|filesizeformat }}</td>

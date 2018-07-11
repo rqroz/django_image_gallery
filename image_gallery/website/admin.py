@@ -1,6 +1,10 @@
 from django.contrib import admin
 
-from .models import UploadedImage, ImageLike
+from .models import *
+
+@admin.register(UserData)
+class UserDataAdmin(admin.ModelAdmin):
+    search_fields = ('user__username', 'user__first_name', 'user__last_name')
 
 @admin.register(UploadedImage)
 class UploadedImageAdmin(admin.ModelAdmin):

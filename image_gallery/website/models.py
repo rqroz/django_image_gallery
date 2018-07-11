@@ -4,7 +4,17 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 
-from website.paths import url_gallery_img, url_gallery_img_small
+from website.paths import *
+
+class UserData(models.Model):
+    user = models.OneToOneField(User, related_name="data", on_delete=models.CASCADE)
+    profile_picture = models.ImageField(blank=True, null=True, upload_to=url_user_img)
+
+    def is_manager(self):
+        return self.user.groups.filter(name='manager').exists()
+
+    def __str__(self):
+        return self.user.username
 
 class UploadedImage(models.Model):
     PENDING = 'Pending'
@@ -18,6 +28,7 @@ class UploadedImage(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     upload = models.ImageField(upload_to=url_gallery_img)
+    sample = models.ImageField(upload_to=url_gallery_img_small)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
     uploaded_on = models.DateTimeField(auto_now_add=True, editable=False)
     date_taken = models.DateField()
@@ -41,6 +52,7 @@ class ImageLike(models.Model):
 
 # Deleting files from storage when database object is deleted
 @receiver(pre_delete, sender=UploadedImage)
+@receiver(pre_delete, sender=UserData)
 def img_post_delete(sender, instance, **kwargs):
     # Pass false so that FileField deletes the file but doesn't save the model.
     instance.upload.delete(False)
