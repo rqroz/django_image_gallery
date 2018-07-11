@@ -8,7 +8,7 @@ class LoginForm(forms.Form):
         max_length=50,
         widget = forms.EmailInput(
             attrs = {
-                'placeholder': 'seuemail@exemplo.com'
+                'placeholder': 'your-email@domain.com'
                 }
             )
         )

@@ -1,0 +1,13 @@
+{% extends 'website/landing/base.html' %}
+{% block title %} Login {% endblock %}
+{% block presentation_content %}
+  <div class="col-md-4 col-md-offset-4">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include 'website/forms/form_snippet.html' %}
+      <div class="form-group text-right">
+        <button type="submit" class="btn btn-default"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Log In</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

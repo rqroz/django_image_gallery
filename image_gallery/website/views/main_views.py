@@ -10,13 +10,13 @@ class IndexView(View):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            self.template_name = 'website/landing.html'
+            self.template_name = 'website/landing/landing.html'
 
         return render(request, self.template_name)
 
 @method_decorator(csrf_protect, name='dispatch')
 class AuthView(View):
-    template_name = 'website/login.html'
+    template_name = 'website/landing/login.html'
     form = LoginForm
     success_url = reverse_lazy('website:index_view')
 
