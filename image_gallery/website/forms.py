@@ -1,4 +1,5 @@
 from django import forms
+from website.models import UploadedImage
 
 class LoginForm(forms.Form):
     username = forms.EmailField(
@@ -21,3 +22,8 @@ class LoginForm(forms.Form):
                 }
             )
         )
+
+class UploadedImageForm(forms.ModelForm):
+    class Meta:
+        model = UploadedImage
+        fields = ('upload', 'date_taken')

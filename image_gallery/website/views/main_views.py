@@ -1,9 +1,10 @@
-from .modules import View, render, redirect, reverse_lazy, method_decorator, login_required, csrf_protect, messages
+from .modules import render, redirect, reverse_lazy, method_decorator, login_required, csrf_protect, messages
 from website.forms import LoginForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
+from django.views import View
 
-# Create your views here.
+
 class IndexView(View):
     template_name = 'website/index.html'
 

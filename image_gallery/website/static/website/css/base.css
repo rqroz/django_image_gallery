@@ -35,6 +35,10 @@ form input {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
+.input-invalid {
+  border-color: #d43f3a;
+}
+
 .btn {
   opacity: 0.75;
   background-color: #fff !important;
@@ -45,29 +49,39 @@ form input {
   background-color: initial !important;
 }
 
-.btn-default, .btn-default:hover {
+.btn-default, .btn-default:hover, .btn-default:focus {
     color: #333;
     border-color: #333;
 }
 
-.btn-primary, .btn-primary:hover {
+.btn-primary, .btn-primary:hover, .btn-primary:focus {
     color: #2e6da4;
     border-color: #2e6da4;
 }
 
-.btn-success, .btn-success:hover {
+.btn-info, .btn-info:hover, .btn-info:focus {
+    color: #46b8da;
+    border-color: #46b8da;
+}
+
+.btn-success, .btn-success:hover, .btn-success:focus {
     color: #4cae4c;
     border-color: #4cae4c;
 }
 
-.btn-warning, .btn-warning:hover {
+.btn-warning, .btn-warning:hover, .btn-warning:focus {
     color: #eea236;
     border-color: #eea236;
 }
 
-.btn-danger, .btn-danger:hover {
+.btn-danger, .btn-danger:hover, .btn-danger:focus {
     color: #d43f3a;
     border-color: #d43f3a;
+}
+
+.form-errors {
+  font-weight: 800;
+  color: #d43f3a;
 }
 
 .search-form input {
@@ -78,6 +92,7 @@ form input {
 .search-form button[type='submit'] {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+  border: 1px solid #ccc;
   border-left: 0px;
 }
 
@@ -86,7 +101,11 @@ form input {
   padding-bottom: 8px !important;
 }
 
-.nav-user-img {
+.margin-auto {
+  margin: auto;
+}
+
+.nav-img {
   width: 33px !important;
   height: 33px !important;
   min-width: 33px !important;
@@ -96,5 +115,12 @@ form input {
   border-radius: calc(33px/2);
   -webkit-border-radius: calc(33px/2);
   -moz-border-radius: calc(33px/2);
-  margin: auto;
+}
+
+.navbar-header {
+  position: relative;
+}
+
+.navbar-header .navbar-brand > img {
+  margin-top: -5px;
 }

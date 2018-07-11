@@ -5,13 +5,11 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 
 from website.paths import *
+from website.validators import *
 
 class UserData(models.Model):
     user = models.OneToOneField(User, related_name="data", on_delete=models.CASCADE)
     profile_picture = models.ImageField(blank=True, null=True, upload_to=url_user_img)
-
-    def is_manager(self):
-        return self.user.groups.filter(name='manager').exists()
 
     def __str__(self):
         return self.user.username
@@ -28,10 +26,10 @@ class UploadedImage(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     upload = models.ImageField(upload_to=url_gallery_img)
-    sample = models.ImageField(upload_to=url_gallery_img_small)
+    thumbnail = models.ImageField(upload_to=url_gallery_thumbnail)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
     uploaded_on = models.DateTimeField(auto_now_add=True, editable=False)
-    date_taken = models.DateField()
+    date_taken = models.DateField(validators=[deny_future_date])
 
     def __str__(self):
         return "%s uploaded %s"%(self.user.username, self.get_filename())
@@ -56,3 +54,4 @@ class ImageLike(models.Model):
 def img_post_delete(sender, instance, **kwargs):
     # Pass false so that FileField deletes the file but doesn't save the model.
     instance.upload.delete(False)
+    instance.thumbnail.delete(False)

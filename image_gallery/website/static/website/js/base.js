@@ -15,7 +15,7 @@ function scrollTo(target){
 }
 
 $(function(){
-  var csrftoken = Cookies.get('csrftoken');
+  var csrftoken = getCookie('csrftoken');
 
   $.ajaxSetup({
       beforeSend: function(xhr, settings) {

@@ -4,3 +4,4 @@ django-storages
 python-decouple
 psycopg2
 Pillow
+PIL

@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='uploadedimage',
             name='sample',
-            field=models.ImageField(default=1, upload_to=website.paths.url_gallery_img_small),
+            field=models.ImageField(default=1, upload_to=website.paths.url_gallery_thumbnail),
             preserve_default=False,
         ),
     ]

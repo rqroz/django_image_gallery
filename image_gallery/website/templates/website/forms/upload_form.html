@@ -1,0 +1,21 @@
+<form id="upload-form" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <span id="user-pk" data-pk="{{request.user.pk}}" class="hidden"></span>
+  <div class="form-errors text-center">
+  {{ form.non_field_errors }}
+  </div>
+  {% for hidden in form.hidden_fields %}
+    {{hidden}}
+  {% endfor %}
+  <div class="row">
+    <div class="col-md-6">
+      {% include "website/forms/individual_formfield.html" with field=form.upload %}
+    </div>
+    <div class="col-md-6">
+      {% include "website/forms/individual_formfield.html" with field=form.date_taken %}
+    </div>
+  </div>
+  <div class="form-group text-right">
+    <button type="button" id="submit-btn" class="btn btn-default">Submit</button>
+  </div>
+</form>

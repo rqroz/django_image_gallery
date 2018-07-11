@@ -1,0 +1,133 @@
+.navbar {
+  margin-bottom: 0;
+}
+
+.section-header {
+  height: 100px;
+  line-height: 100px;
+  background-image: url('/static/website/img/wedding-line-bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #999;
+  margin-bottom: 20px;
+}
+
+.thumbnail-container {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.zoom-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.zoom-container:hover {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.zoom-container a {
+  color: #717171;
+  font-size: x-large;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #eee;
+  transform: translate(-50%, -50%);
+  -webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+#upload-form input {
+  border: 0px;
+  border-bottom: 1px solid #333;
+}
+
+.list-group-item {
+  border-left: 0;
+  border-right: 0;
+}
+
+.img-card {
+  width: 202px;
+  border-radius: 15px;
+}
+
+.img-card .card-body {
+  line-height: 30px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.img-card .card-body p {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  width: 200px;
+  text-align: center;
+}
+
+.img-card .card-img-top {
+  width: 200px;
+  height: 200px;
+  max-height: 200px;
+  max-width: 200px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.img-card .card-link {
+  display: inline-block;
+  width: 100px;
+  opacity: 0.85;
+}
+
+.img-card .card-link:hover {
+  text-decoration: none;
+  color: #fff;
+  opacity: 1;
+}
+
+.link-success {
+  background-color: #4cae4c;
+  color: #fff;
+  border-bottom-left-radius: 15px;
+}
+
+.link-danger {
+  background-color: #d43f3a;
+  color: #fff;
+  border-bottom-right-radius: 15px;
+}
+
+.status-danger {
+  background-color: #d43f3a;
+}
+
+.status-success {
+  background-color: #4cae4c;
+}
+
+.status-warning {
+  background-color: #eea236;
+}
