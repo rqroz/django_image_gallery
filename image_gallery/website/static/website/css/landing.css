@@ -1,0 +1,50 @@
+.presentation-section {
+  height: 100vh;
+  width: 100%;
+  background-image: url('/static/website/img/landing-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.presentation-container {
+  position: relative;
+  z-index: 3;
+}
+
+.presentation-container > .row {
+  justify-content: center !important;
+  margin-right: 0;
+  margin-left: 0;
+  position: relative;
+}
+
+.presentation-container > .row > .col-md-12 {
+  position: absolute;
+  top: 50%;
+  margin-top: -100px;
+}
+
+.presentation-text {
+  color: #fff !important;
+}
+
+.presentation-text h2 {
+  font-size: 8em;
+  font-weight: 100 !important;
+  transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+}
+
+.presentation-text h2 > span {
+  color: #ffa84c !important;
+}
+
+.presentation-text h3 {
+  font-weight: 100;
+  transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+}

@@ -1,7 +1,20 @@
 {% extends 'website/base/base.html' %}
 {% block title %} Landing {% endblock %}
 {% block content %}
-
-landing
-
+{% load static %}
+<link href="{% static 'website/css/landing.css' %}?v=1.10" rel="stylesheet">
+<div class="section presentation-section">
+  <div class="section-curtain full-height">
+    <div class="container presentation-container full-height">
+      <div class="row full-height">
+        <div class="col-md-12 text-center">
+          <div class="presentation-text">
+            <h2>Husband <span>&</span> Wife</h2>
+            <h3>This is our collaborative wedding album!</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
