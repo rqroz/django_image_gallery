@@ -7,7 +7,7 @@
         {% include 'website/base/thumbnail_container_snippet.html' with custom_class='item-top' %}
         <div class="item-bottom">
           {% if same_user %}
-              <p href="#" class="item-bottom-content {{ui.status|get_status_class}}">
+              <p href="#" class="item-bottom-content status-{{ui.status|get_status_class}}">
                 {{ui.status}}
               </p>
           {% else %}

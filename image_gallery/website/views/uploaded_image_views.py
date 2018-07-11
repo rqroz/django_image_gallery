@@ -1,8 +1,8 @@
-from .modules import login_required, method_decorator, reverse_lazy, redirect, render, messages
+from .modules import login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages
 from website.models import UploadedImage
 from website.forms import UploadedImageForm, UploadStatusForm
 from website.helper import is_user_a_manager
-
+from .main_views import StatusView
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -16,25 +16,14 @@ from PIL import Image, ExifTags
 from io import BytesIO
 import os
 
-@method_decorator(login_required, name='dispatch')
-class UserImagesView(SingleObjectMixin, ListView):
-    paginate_by = 10
+@method_decorator([login_required, csrf_protect], name='dispatch')
+class UserImagesView(SingleObjectMixin, StatusView):
     template_name = "website/user/uploads.html"
     form = UploadedImageForm
-    status = UploadedImage.PENDING
-    status_form = UploadStatusForm
-
-    def replace_status(self, temp_status):
-        if temp_status is None: return
-        for key, value in UploadedImage.STATUS_CHOICES:
-            if temp_status == value:
-                self.status = value
-                break
 
     def get(self, request, *args, **kwargs):
         self.user_pk = kwargs.get('pk')
         if is_user_a_manager(request.user) or self.user_pk == request.user.pk:
-            self.replace_status(request.GET.get('status'))
             self.object = get_object_or_404(User, pk=kwargs.get('pk'))
             return super().get(request, *args, **kwargs)
         else:
@@ -44,7 +33,6 @@ class UserImagesView(SingleObjectMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.object
         context['upload_form'] = self.form()
-        context['status_form'] = self.status_form(initial={'status':self.status})
         context['same_user'] = self.request.user.pk == self.user_pk
         return context
 

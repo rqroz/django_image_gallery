@@ -34,6 +34,13 @@ $(function(){
     });
   });
 
+  let status_form = $("#status-form");
+  status_form.find("select[name='status']").change(function(){
+    if($(this).val() !== "-1"){
+        status_form.trigger('submit');
+    }
+  });
+
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 })

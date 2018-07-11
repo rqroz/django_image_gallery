@@ -13,6 +13,20 @@
   margin-top: -25px;
 }
 
+.approval-list .list-group-item {
+  border-radius: 0;
+}
+
+.approval-list .first-list-item {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.approval-list .last-list-item {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 .photo-container {
   width: 100px !important;
   height: 100px !important;

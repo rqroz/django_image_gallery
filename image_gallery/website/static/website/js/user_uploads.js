@@ -5,13 +5,6 @@ $(function(){
   });
   datepicker.attr("autocomplete", "off");
 
-  let status_form = $("#status-form");
-  status_form.find("select[name='status']").change(function(){
-    if($(this).val() !== "-1"){
-        status_form.trigger('submit');
-    }
-  });
-
   let wall = new Freewall("#cards-container");
   wall.fitWidth();
 })

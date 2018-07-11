@@ -11,11 +11,11 @@ def is_manager(user):
 @register.filter
 def get_status_class(status):
     if status == UploadedImage.ACCEPTED:
-        return 'status-success'
+        return 'success'
     elif status == UploadedImage.REFUSED:
-        return 'status-danger'
+        return 'danger'
     elif status == UploadedImage.PENDING:
-        return 'status-warning'
+        return 'warning'
 
 @register.filter
 def get_total_uploads(user):

@@ -3,7 +3,8 @@ from website.forms import LoginForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
-
+from django.views.generic import ListView
+from website.forms import UploadStatusForm, UploadedImage
 
 class IndexView(View):
     template_name = 'website/index.html'
@@ -47,3 +48,29 @@ class AuthView(View):
 def logout_view(request):
     logout(request)
     return redirect(reverse_lazy('website:index_view'))
+
+
+@method_decorator([csrf_protect, login_required], name='dispatch')
+class StatusView(ListView):
+    """
+        Generic List View used to filter UploadedImages by their status
+    """
+    paginate_by = 10
+    status_form = UploadStatusForm
+    status = UploadedImage.PENDING
+
+    def replace_status(self, temp_status):
+        if temp_status is None: return
+        for key, value in UploadedImage.STATUS_CHOICES:
+            if temp_status == value:
+                self.status = value
+                break
+
+    def get(self, request, *args, **kwargs):
+        self.replace_status(request.GET.get('status'))
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['status_form'] = self.status_form(initial={'status':self.status})
+        return context

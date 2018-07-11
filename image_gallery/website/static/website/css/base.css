@@ -161,6 +161,22 @@ form input {
     border-color: #d43f3a;
 }
 
+.text-info {
+  color: #46b8da;
+}
+
+.text-success {
+  color: #4cae4c;
+}
+
+.text-warning {
+  color: #eea236;
+}
+
+.text-danger {
+  color: #d43f3a;
+}
+
 .form-errors {
   font-weight: 800;
   color: #d43f3a;
