@@ -11,4 +11,7 @@ $(function(){
         status_form.trigger('submit');
     }
   });
+
+  let wall = new Freewall("#cards-container");
+  wall.fitWidth();
 })

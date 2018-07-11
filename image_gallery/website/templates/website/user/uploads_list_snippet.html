@@ -1,58 +1,32 @@
 {% load website_template_tags %}
 <div class="row">
-  <div class="col-md-12">
-    <table class="table table-condensed user-uploads-table">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Uploaded at</th>
-          <th>Taken at</th>
-          <th>Size</th>
-          <th>Thumb Size</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ui in page_obj %}
-          <tr>
-            <td>
-              <div class="card img-card">
-                <div class="card-img-top thumbnail-container" style="background-image:url('{{ ui.thumbnail.url }}')">
-                  <div class="zoom-container clickable"><a data-target="{{ui.upload.url}}"><span class="fas fa-search"></span></a></div>
-                </div>
-                <div class="card-body">
-                  {% if same_user %}
-                    {% if request.user|is_manager %}
-                      <p href="#" class="{{ui.status|get_status_class}}">
-                        {{ui.status}}
-                      </a>
-                    {% endif %}
-                  {% else %}
-                    <a href="#" class="card-link link-success text-center">
-                      <i class="fas fa-check"></i>
-                    </a><!--
-                  --><a href="#" class="card-link link-danger text-center">
-                      <i class="fas fa-times"></i>
-                    </a>
-                  {% endif %}
-                </div>
-              </div>
-            </td>
-            <td>
-
-            </td>
-            <td>{{ ui.uploaded_on }}</td>
-            <td>{{ ui.date_taken }}</td>
-            <td>{{ ui.upload.size|filesizeformat }}</td>
-            <td>{{ ui.thumbnail.size|filesizeformat }}</td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td colspan="3">{% if same_user %} You {% else %} This user {% endif %} have not uploaded any photo yet...</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    </div>
+  <div class="col-md-10 col-md-offset-1">
+    <div id="cards-container">
+    {% for ui in page_obj %}
+      <div class="item">
+        <div class="item-top thumbnail-container" style="background-image:url('{{ ui.thumbnail.url }}')">
+          <div class="zoom-container clickable"><a data-target="{{ui.upload.url}}"><span class="fas fa-search"></span></a></div>
+        </div>
+        <div class="item-bottom">
+          {% if same_user %}
+              <p href="#" class="item-bottom-content {{ui.status|get_status_class}}">
+                {{ui.status}}
+              </p>
+          {% else %}
+            <div class="item-bottom-content">
+              <a href="#" class="link-success text-center" data-target="{{ui.pk}}">
+                <i class="fas fa-check"></i>
+              </a><!--
+            --><a href="#" class="link-danger text-center" data-target="{{ui.pk}}">
+                <i class="fas fa-times"></i>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p>{% if same_user %} You {% else %} This user {% endif %} have not uploaded any photo yet...</p>
+    {% endfor %}
+  </div>
   </div>
 </div>
