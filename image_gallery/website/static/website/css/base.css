@@ -2,6 +2,28 @@
   margin: calc(100vh/2 - 100px) auto !important;
 }
 
+.section-header {
+  height: 100px;
+  line-height: 100px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #999;
+  margin-bottom: 20px;
+}
+
+.section-curtain {
+  background-color: rgba(0, 0, 0, 0.25)
+}
+
+.header-title {
+  font-size: -webkit-xxx-large;
+  font-weight: 100;
+  color: #fff;
+}
+
 .footer {
   background-color: #FFFFFF;
   line-height: 20px;

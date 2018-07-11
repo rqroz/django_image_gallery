@@ -2,17 +2,8 @@
   margin-bottom: 0;
 }
 
-.section-header {
-  height: 100px;
-  line-height: 100px;
-  background-image: url('/static/website/img/wedding-line-bg.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid #999;
-  border-top: 1px solid #999;
-  margin-bottom: 20px;
+.uploads-header {
+  background-image: url('/static/website/img/uploads-bg.jpg');
 }
 
 .statistics-container {
