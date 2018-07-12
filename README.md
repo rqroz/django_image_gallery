@@ -4,7 +4,7 @@ This is a web application written in Django used to serve as a basis for a colla
 
 ## Getting Started
 
-First of all, go ahead and clone this repo in order to get the content.
+Go ahead and clone this repo in order to get the content.
 
 ```
 $ git clone https://github.com/rqroz/django_image_gallery.git
@@ -13,33 +13,29 @@ $ git clone https://github.com/rqroz/django_image_gallery.git
 
 ### Prerequisites
 
-Behore starting the server, you'll need to install all the dependencies and preconfigure your environment variables.
-
-1. Installing Dependencies
-   - To install the project dependencies, move to the project folder and run:
-     ```
-     $ pip3 install -r requirements.txt
-     ```
-2. Environment Variables
-   - This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
+- python3
+- pip3
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Before starting the server, you'll need to install all the dependencies and preconfigure your environment variables.
 
-Say what the step will be
+1. Installing Dependencies
+   - To install the project dependencies, move to the project folder and run:
+   ```
+   $ pip3 install -r requirements.txt
+   ```
 
-```
-Give the example
-```
+2. Environment Variables
+   - This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+3. Starting the development server
+   - Now that you've done all the pre-configuration needed, go ahead and run the command bellow from the folder containing the manage.py file:
+   ```
+   $ ./manage.py runserver
+   ```
+  If you navigate to http://127.0.0.1:8000/, you should see the screen bellow:
+  ![landing page](/example-files/img/landing.png)
 
 ## Running the tests
 
