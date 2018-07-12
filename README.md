@@ -84,7 +84,7 @@ After these steps, your application should be ready for use. The users you just 
   **Note**: When someone requests access, there is a message saying that an email will be sent if the managers accept their request. That is NOT implemented. That is for you to implement ([UserApprovalView](/image_gallery/website/views/user_views.py)) based on your preferred SMTP module. Bellow is a link to the django docs.
   - [Django SMTP](https://docs.djangoproject.com/en/2.0/topics/email/)
 
-  <div style="dislpay:--webkit-inline-box;text-align:center;">
+  <div style="dislpay:--webkit-inline-box;" align="center">
     <img height="220" alt="User Request" src="/example-files/imgs/user-request.png">
     <img height="220" alt="User Approval" src="/example-files/imgs/user-approval.png">
   </div>
