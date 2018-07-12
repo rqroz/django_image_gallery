@@ -1,5 +1,5 @@
 from django import forms
-from website.models import UploadedImage, User
+from website.models import UploadedImage, User, UserData
 
 class LoginForm(forms.Form):
     username = forms.EmailField(
@@ -13,7 +13,7 @@ class LoginForm(forms.Form):
             )
         )
     password = forms.CharField(
-        label = 'Senha',
+        label = 'Password',
         min_length = 6,
         max_length = 30,
         widget = forms.PasswordInput(
@@ -38,6 +38,16 @@ class UserForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'your-email@domain.com'}),
             'password': forms.PasswordInput(attrs={'placeholder': '**********'}),
         }
+
+class UpdateUserForm(UserForm):
+    def __init__(self, *args, **kwargs):
+        super(UpdateUserForm, self).__init__(*args, **kwargs)
+        self.fields.pop('password', None)
+
+class UserDataForm(forms.ModelForm):
+    class Meta:
+        model = UserData
+        fields = ('profile_picture',)
 
 
 class SearchForm(forms.Form):

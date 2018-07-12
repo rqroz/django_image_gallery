@@ -13,9 +13,6 @@ urlpatterns = [
     # Home Page
     path('', IndexView.as_view(), name='index_view'),
 
-    # UploadedImage Views
-    path('uploads/<int:pk>/', UserImagesView.as_view(), name='user_uploads_view'),
-
     # Gallery Views
     path('gallery/', GalleryView.as_view(), name='gallery_view'),
     path('gallery/approval/', PhotoApprovalView.as_view(), name='photo_approval_view'),
@@ -25,4 +22,7 @@ urlpatterns = [
 
     # User
     path('users/approval/', UserApprovalView.as_view(), name='user_approval_view'),
+    path('users/<int:pk>/', UserProfile.as_view(), name='user_detail_view'),
+    path('users/<int:pk>/update-pass/', UpdatePasswordView.as_view(), name='user_pass_view'),
+    path('users/<int:pk>/uploads/', UserUploadsView.as_view(), name='user_uploads_view'),
 ]

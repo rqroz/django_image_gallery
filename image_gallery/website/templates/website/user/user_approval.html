@@ -4,7 +4,6 @@
 {% load website_template_tags %}
 
 {% block header_content %}
-<link href="{% static 'website/css/gallery.css' %}?v=1.0" rel="stylesheet">
 <div class="row">
   <div class="col-md-12">
     <div class="header-title">
@@ -63,6 +62,5 @@
     {% include 'website/base/paginator.html' %}
   </div>
 </div>
-<script src="{% static 'website/third-party/freewall/freewall.js' %}?version=1.1"></script>
 {% endif %}
 {% endblock %}

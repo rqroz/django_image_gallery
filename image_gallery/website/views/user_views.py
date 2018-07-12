@@ -1,12 +1,15 @@
-from .modules import ListView, View, login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages
+from .modules import View, ListView, DetailView, login_required, csrf_protect, method_decorator, reverse_lazy, redirect, render, messages, manager_only
 from website.models import UploadedImage
-from website.forms import UploadedImageForm, UploadStatusForm
+from website.forms import UploadedImageForm, UploadStatusForm, UpdateUserForm, UserDataForm
 from website.helper import is_user_a_manager
 from .main_views import StatusView
 
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
 from django.http import Http404, JsonResponse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.forms import PasswordChangeForm
+
+from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
 
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import ModelFormMixin
@@ -15,8 +18,90 @@ from PIL import Image, ExifTags
 from io import BytesIO
 import os
 
+@method_decorator([csrf_protect, login_required], name='dispatch')
+class UserProfile(DetailView):
+    model = User
+    template_name = 'website/user/user_profile.html'
+    form = UpdateUserForm
+    data_form = UserDataForm
+    pass_form = PasswordChangeForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['form'] = self.form(instance=user)
+        context['data_form'] = self.data_form(instance=user.data)
+        context['pass_form'] = self.pass_form(user=user)
+        return context
+
+    def username_exists(self, username):
+        return User.objects.filter(username=username).exclude(pk=self.request.user.pk).exists()
+
+    def post(self, request, *args, **kwargs):
+        user = self.get_object()
+        form = self.form(request.POST, instance=user)
+        data_form = self.data_form(request.POST, request.FILES, instance=user.data)
+
+        if form.is_valid() and data_form.is_valid():
+            if not self.username_exists(form.instance.email):
+                user = form.save(commit=False)
+                user.username = user.email
+                user.save()
+                data_form.save()
+                messages.error(request, 'Personal information successfully updated.')
+                return redirect(reverse_lazy('website:user_detail_view', kwargs={'pk':user.pk}))
+            else:
+                messages.error(request, 'There is another user with the email you provided.')
+
+        context = {
+            'form': form,
+            'data_form': data_form,
+            'pass_form': self.pass_form(),
+        }
+        return render(request, self.template_name, context)
+
+
+@method_decorator([csrf_protect, login_required], name='dispatch')
+class UpdatePasswordView(View):
+    def post(self, request, *args, **kwargs):
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        is_valid = form.is_valid()
+        data = {'success': is_valid }
+
+        if is_valid:
+            form.save()
+            update_session_auth_hash(request, form.user)
+        else:
+            print(form.errors)
+            data['errors'] = form.errors
+
+        return JsonResponse(data)
+
+@method_decorator([csrf_protect, login_required, manager_only], name='dispatch')
+class UserApprovalView(ListView):
+    template_name = 'website/user/user_approval.html'
+    paginate_by = 10
+    success_url = reverse_lazy('website:user_approval_view')
+
+    def get_queryset(self):
+        return User.objects.filter(is_active=False).order_by('first_name', 'last_name')
+
+    def post(self, request, *args, **kwargs):
+        data = dict(request.POST.lists())
+        data.pop('csrfmiddlewaretoken')
+        for key, val in data.items():
+            user = get_object_or_404(User, pk=key)
+            if val[0] == 'Accepted':
+                user.is_active = True
+                user.save()
+            else:
+                user.delete()
+
+        return redirect(self.success_url)
+
+
 @method_decorator([login_required, csrf_protect], name='dispatch')
-class UserImagesView(SingleObjectMixin, StatusView):
+class UserUploadsView(SingleObjectMixin, StatusView):
     template_name = "website/user/user_uploads.html"
     form = UploadedImageForm
 

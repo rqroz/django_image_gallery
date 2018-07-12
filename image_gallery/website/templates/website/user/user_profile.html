@@ -1,0 +1,59 @@
+{% extends 'website/base/logged_base.html' %}
+{% block title %} User Approval {% endblock %}
+{% load static %}
+{% load website_template_tags %}
+
+{% block header_content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="header-title">
+      Profile
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body_content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="user-img-container clickable-img-container" style="background-image:url('{{ object|get_user_image_url }}')">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form id="user-form" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6">
+              {% include 'website/forms/individual_formfield.html' with field=form.first_name %}
+            </div>
+            <div class="col-md-6">
+              {% include 'website/forms/individual_formfield.html' with field=form.last_name %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              {% include 'website/forms/individual_formfield.html' with field=form.email %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 profile-form-container">
+              {% include 'website/forms/individual_formfield.html' with field=data_form.profile_picture %}
+            </div>
+          </div>
+          <div class="form-group text-right">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#user-pass-modal">
+              <i class="fas fa-key"></i>&nbsp;&nbsp;Change Password
+            </buttonn>
+            <button type="submit" class="btn btn-default"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% include 'website/modals/user_password_modal.html' %}
+{% include 'website/modals/wait_modal.html' %}
+<script src="{% static 'website/js/profile.js' %}?version=1.0"></script>
+{% endblock %}

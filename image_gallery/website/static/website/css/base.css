@@ -182,6 +182,10 @@ form input {
   color: #d43f3a;
 }
 
+#user-pass-modal .form-errors {
+  font-weight: 300;
+}
+
 .search-form input {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -223,14 +227,22 @@ form input {
   margin-top: -5px;
 }
 
-
-.thumbnail-container {
-  width: 100px;
-  height: 100px;
+.clickable-img-container {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  margin: 0 auto;
+}
+
+.user-img-container {
+  width: 200px;
+  height: 200px;
+}
+
+.thumbnail-container {
+  width: 100px;
+  height: 100px;
 }
 
 .clickable:hover {
@@ -313,4 +325,13 @@ form input {
 
 .user-approval-form .list-group-item > .row > .col-md-4 > div {
   line-height: 30px;
+}
+
+#user-form .text-right button {
+  margin-left: 10px !important;
+}
+
+#user-pass-modal .modal-content {
+  width: 300px;
+  margin: 0 auto;
 }

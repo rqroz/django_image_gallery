@@ -2,16 +2,12 @@
 {% load website_template_tags %}
 <li class="dropdown">
   <a href="#" class="user-dropdown-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-    {% if request.user.data.photo %}
-    <img src="/media/{{request.user.details.photo}}" class="nav-img margin-auto" alt="Foto de perfil"></img>
-    {% else %}
-    <img src="{% static 'website/img/default_user_icon.png' %}" class="nav-img margin-auto" alt="Foto de perfil"></img>
-    {% endif %}
+    <img src="{{ request.user|get_user_image_url }}" class="nav-img margin-auto" alt="Foto de perfil"></img>
     &nbsp;{{ request.user.first_name }}
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+    <li><a href="{% url 'website:user_detail_view' request.user.pk %}"><i class="fas fa-user"></i>Profile</a></li>
     <li><a href="{% url 'website:user_uploads_view' request.user.pk %}"><i class="fas fa-images"></i>My Uploads</a></li>
     {% if request.user|is_manager %}
     <li><a href="{% url 'website:photo_approval_view' %}"><i class="fas fa-clipboard-check"></i>Approve Photos</a></li>

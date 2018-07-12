@@ -24,3 +24,10 @@ def get_total_uploads(user):
 @register.filter
 def get_status_uploads(user, status):
     return user.uploadedimage_set.filter(status=status).count()
+
+@register.filter
+def get_user_image_url(user):
+    try:
+        return user.data.profile_picture.url
+    except:
+        return '/static/website/img/default_user_icon.png'

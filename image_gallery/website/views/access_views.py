@@ -64,25 +64,3 @@ class RequestAcessView(AnonymousFormView):
         else:
             context = { 'form': form }
             return render(request, self.template_name, context)
-
-@method_decorator([csrf_protect, login_required, manager_only], name='dispatch')
-class UserApprovalView(ListView):
-    template_name = 'website/user/user_approval.html'
-    paginate_by = 10
-    success_url = reverse_lazy('website:user_approval_view')
-
-    def get_queryset(self):
-        return User.objects.filter(is_active=False).order_by('first_name', 'last_name')
-
-    def post(self, request, *args, **kwargs):
-        data = dict(request.POST.lists())
-        data.pop('csrfmiddlewaretoken')
-        for key, val in data.items():
-            user = get_object_or_404(User, pk=key)
-            if val[0] == 'Accepted':
-                user.is_active = True
-                user.save()
-            else:
-                user.delete()
-
-        return redirect(self.success_url)
