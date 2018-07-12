@@ -100,7 +100,7 @@ After these steps, your application should be ready for use. The users you just 
 
   <div style="dislpay:--webkit-inline-box;">
     <img height="246" alt="User Uploads" src="/example-files/imgs/user-uploads.png">
-    <img width="246" alt="Photo Approval" src="/example-files/imgs/gallery-approval.png">
+    <img height="246" alt="Photo Approval" src="/example-files/imgs/gallery-approval.png">
   </div>
 
 ### Gallery
