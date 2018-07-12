@@ -75,12 +75,30 @@ After these steps, your application should be ready for use. The users you just 
 
 ## Website Behavior
 
-Explain what these tests test and why
+- New Users (Friends)
 
-```
-Give an example
-```
+  Friends from the couple can request access by clicking button next to the login button in the landing page. Once requested, it will be unactive (meaning they can't log in) until a decision is taken by the managers.
 
+  **Managers**: To accept/deny a new user, click on your name (right side of the navbar), then click the Approve Users button to be taken to the users approval section.
+
+  **Note**: When someone requests access, there is a message saying that an email will be sent if the managers accept their request. That is NOT implemented. That is for you to implement based on your preferred SMTP module. Bellow is a link to the django docs.
+    - * [Django](https://docs.djangoproject.com/en/2.0/topics/email/)
+
+- Uploads
+
+  All users can upload images under the section My Uploads.
+
+  If the upload is made by a manager, the image status will automatically be set to Accepted (meaning it can be view under the Gallery section). Otherwise, the image status will be set to Pending and is up to the managers if they will accept or refuse it.
+
+  **Note**: All the photos are kept, even the ones refused. That is so the managers can accept a previously refused photo if they have a change of heart.
+
+  **Managers**: To change the status of an image, click on your name (right side of the navbar), then click the Approve Photos button to be taken to the photo approval section. There, you will be able to change the status of all uploaded photos.
+
+- Gallery
+
+- Profile
+
+  Finally, there is a basic profile section that allows the users to change their personal data and password.
 
 ## Built With
 
