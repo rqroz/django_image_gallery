@@ -17,7 +17,6 @@
 {% block body_content %}
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    {% if page_obj %}
       <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
           <form id="status-form" class="imediate-form" method="get">
@@ -25,6 +24,7 @@
           </form>
         </div>
       </div>
+      {% if page_obj %}
       <div class="approval-list list-group">
         <form id="photo-approval-form" method="post">
           {% csrf_token %}
@@ -82,7 +82,7 @@
       </div>
     {% else %}
       <div class="no-data">
-        <p class="text-center">There are no photos to approve.</p>
+        <p class="text-center">There are no {{status|lower}} photos to approve.</p>
       </div>
     {% endif %}
   </div>

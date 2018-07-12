@@ -84,6 +84,10 @@ After these steps, your application should be ready for use. The users you just 
   **Note**: When someone requests access, there is a message saying that an email will be sent if the managers accept their request. That is NOT implemented. That is for you to implement ([UserApprovalView](/image_gallery/website/views/user_views.py)) based on your preferred SMTP module. Bellow is a link to the django docs.
   - [Django SMTP](https://docs.djangoproject.com/en/2.0/topics/email/)
 
+### Search (Manager's only)
+
+  Managers can search their friends (other users) by their names to see which photos they uploaded. The search bar is located in the navbar so they can search from all pages.
+
 ### Uploads
 
   All users can upload images under the section My Uploads.
@@ -94,6 +98,9 @@ After these steps, your application should be ready for use. The users you just 
 
   **Managers**: To change the status of an image, click on your name (right side of the navbar), then click the Approve Photos button to be taken to the photo approval section. There, you will be able to change the status of all uploaded photos.
 
+  ![gallery page](/example-files/imgs/user-uploads.png | width=400 )
+  ![gallery page](/example-files/imgs/photo-approval.png | width=400 )
+
 ### Gallery
 
   - The Gallery is the main section: all users have access to it and it shows all the approved photos.
@@ -101,6 +108,8 @@ After these steps, your application should be ready for use. The users you just 
   - Users can sort the images either by number of likes or by date taken. It is also possible to change the ordering (ascending/descending).
 
   - **LARGE DATA SIMULATION**: You might notice a little red button on the right side of the gallery page with the initials SLG (Simulate Large Data). That button is for development only, its purpose is to show how the gallery will behave with 100x the data it contains in the first page (if you uploaded 2 images and click this button, the first page of the gallery will show 200 images, 100 of each).
+
+  ![gallery page](/example-files/imgs/gallery.png)
 
 ### Profile
 

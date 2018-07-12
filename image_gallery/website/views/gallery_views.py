@@ -44,9 +44,15 @@ class PhotoApprovalView(StatusView):
     template_name = 'website/gallery/photo_approval.html'
     success_url = reverse_lazy('website:photo_approval_view')
     paginate_by = 10
+    status = UploadedImage.PENDING
 
     def get_queryset(self):
         return UploadedImage.objects.filter(status=self.status).order_by('-uploaded_on')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['status'] = self.status
+        return context
 
     def post(self, request, *args, **kwargs):
         print(self.success_url)
