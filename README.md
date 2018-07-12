@@ -98,8 +98,10 @@ After these steps, your application should be ready for use. The users you just 
 
   **Managers**: To change the status of an image, click on your name (right side of the navbar), then click the Approve Photos button to be taken to the photo approval section. There, you will be able to change the status of all uploaded photos.
 
-  <img width="400" alt="User Uploads" src="/example-files/imgs/user-uploads.png">
-  <img width="400" alt="Photo Approval" src="/example-files/imgs/photo-approval.png">
+  <div style="dislpay:--webkit-inline-box;">
+    <img width="400" alt="User Uploads" src="/example-files/imgs/user-uploads.png">
+    <img width="400" alt="Photo Approval" src="/example-files/imgs/photo-approval.png">
+  </div>
 
 ### Gallery
 
