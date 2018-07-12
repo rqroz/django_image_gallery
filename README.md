@@ -37,6 +37,8 @@ Before starting the server, you'll need to install all the dependencies and prec
 
 3. Applying Migrations
 
+   **NOTE**: Before proceeding, please go to image_gallery/website/migrations/ and delete any files or folders other than the __init__.py (**atention** the __init__.py file MUST remain there).
+
    After configuring your environment variables, go ahead and apply the migrations to your database.
    ```
    $ ./manage.py makemigrations
