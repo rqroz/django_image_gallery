@@ -1,0 +1,5 @@
+{% load website_template_tags %}
+<div class="clickable-img-container thumbnail-container {{custom_class}}" data-pk="{{ui.pk}}" data-target="{{ui.upload.url}}" data-width="{{ui.upload.width}}" data-height="{{ui.upload.height}}" style="background-image:url('{{ ui.thumbnail.url }}')">
+  <div class="zoom-container clickable"><a class="display-img-btn"><span class="fas fa-search"></span></a></div>
+  <div class="like-container {% if ui|user_liked_image:request.user %}user-liked{% endif %} clickable"><a class="like-img-btn"><span class="fas fa-thumbs-up"></span>&nbsp;<span class="likes-text">{{ui.number_of_likes}}</span></a></div>
+</div>

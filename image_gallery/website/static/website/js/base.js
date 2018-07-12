@@ -34,10 +34,10 @@ $(function(){
     });
   });
 
-  let status_form = $("#status-form");
-  status_form.find("select[name='status']").change(function(){
+  let imediate_form = $(".imediate-form");
+  imediate_form.find("select").change(function(){
     if($(this).val() !== "-1"){
-        status_form.trigger('submit');
+        imediate_form.trigger('submit');
     }
   });
 

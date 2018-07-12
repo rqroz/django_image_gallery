@@ -15,6 +15,7 @@ urlpatterns = [
 
     # Gallery Views
     path('gallery/', GalleryView.as_view(), name='gallery_view'),
+    path('gallery/like/', ImageLikeView.as_view(), name='image_like_view'),
     path('gallery/approval/', PhotoApprovalView.as_view(), name='photo_approval_view'),
 
     # Search

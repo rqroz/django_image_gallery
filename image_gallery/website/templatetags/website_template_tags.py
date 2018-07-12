@@ -18,6 +18,10 @@ def get_status_class(status):
         return 'warning'
 
 @register.filter
+def user_liked_image(uploaded_image, user):
+    return uploaded_image.user_liked(user)
+
+@register.filter
 def get_total_uploads(user):
     return user.uploadedimage_set.all().count()
 

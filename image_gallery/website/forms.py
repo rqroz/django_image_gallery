@@ -23,6 +23,15 @@ class LoginForm(forms.Form):
             )
         )
 
+class GalleryFilterForm(forms.Form):
+    DATE_TAKEN = 'date_taken'
+    NUMBER_OF_LIKES = 'likes'
+    CHOICES = (
+        (DATE_TAKEN, 'Date Taken'),
+        (NUMBER_OF_LIKES, 'Number of Likes'),
+    )
+    filter_by = forms.ChoiceField(choices=CHOICES, widget=forms.widgets.Select(attrs={'class':'form-control'}))
+
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)

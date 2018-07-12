@@ -38,6 +38,25 @@ class UploadedImage(models.Model):
         # Gets the filename and removes the 'b' inserted at the begining when them model is saved
         return os.path.basename(self.upload.name)[1:]
 
+    def number_of_likes(self):
+        return self.imagelike_set.count()
+
+    def user_liked(self, user):
+        return self.imagelike_set.filter(liked_by__pk=user.pk).exists()
+
+    def like(self, user):
+        likeRelation, created = ImageLike.objects.get_or_create(liked_by=user, image=self)
+        if created:
+            likeRelation.save()
+        else:
+            likeRelation.delete()
+
+        data = {
+            'likes': self.number_of_likes(),
+            'liked': created
+            }
+        return data
+
 
 class ImageLike(models.Model):
     liked_by = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -45,7 +64,7 @@ class ImageLike(models.Model):
     date = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
-        return "%s liked %s"%(self.user.username, self.image.upload.name)
+        return "%s liked %s"%(self.liked_by.username, self.image.upload.name)
 
 
 # Deleting files from storage when database object is deleted
