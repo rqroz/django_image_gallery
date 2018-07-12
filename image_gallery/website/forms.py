@@ -23,14 +23,26 @@ class LoginForm(forms.Form):
             )
         )
 
-class GalleryFilterForm(forms.Form):
+class GalleryOrderingForm(forms.Form):
     DATE_TAKEN = 'date_taken'
     NUMBER_OF_LIKES = 'likes'
-    CHOICES = (
+
+    ASCENDING = 'asc'
+    DESCENDING = 'desc'
+
+    SORTING_CHOICES = (
         (DATE_TAKEN, 'Date Taken'),
         (NUMBER_OF_LIKES, 'Number of Likes'),
     )
-    filter_by = forms.ChoiceField(choices=CHOICES, widget=forms.widgets.Select(attrs={'class':'form-control'}))
+
+    ORDERING_CHOICES = (
+        (ASCENDING, 'Ascending'),
+        (DESCENDING, 'Descending'),
+    )
+
+    sort_by = forms.ChoiceField(choices=SORTING_CHOICES, widget=forms.widgets.Select(attrs={'class':'form-control'}))
+    order = forms.ChoiceField(choices=ORDERING_CHOICES, widget=forms.widgets.Select(attrs={'class':'form-control'}))
+
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

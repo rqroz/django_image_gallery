@@ -25,3 +25,13 @@
 .user-liked:hover {
   background: rgba(70, 184, 218, 0.5) !important;
 }
+
+.form-inline {
+  position: relative;
+}
+
+.form-inline .submit-container {
+  position: absolute;
+  bottom: 0;
+  margin-left: 5px;
+}

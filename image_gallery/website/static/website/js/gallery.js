@@ -15,4 +15,18 @@ $(function(){
       });
     });
   });
+
+
+  let order_label = $("#gallery-filter-form").find('.order-label');
+  let order_input = order_label.find('input[type="checkbox"]');
+  let order_icon = order_label.find('i');
+  order_input.on('change', function(){
+    if(this.checked){
+      order_icon.addClass('fa-sort-up');
+      order_icon.removeClass('fa-sort-down');
+    }else{
+      order_icon.addClass('fa-sort-down');
+      order_icon.removeClass('fa-sort-up');
+    }
+  });
 })
