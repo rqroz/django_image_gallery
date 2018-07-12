@@ -50,7 +50,7 @@ After following the steps above, you should see the screen bellow on your localh
 
 ![landing page](/example-files/imgs/landing.png)
 
-## Website Configuration
+## Website Start Configuration
 
 Now that your app is up and running, stop the development server and let's start configuring the manager users (the users representing the couple who just married).
 
@@ -62,7 +62,7 @@ Now that your app is up and running, stop the development server and let's start
    ```
 
 2. Create the manager group & users
-   - Now that you have created a superuser, start the development server again and log in into the admin section (localhost/admin). Once logged in, click the "+add" button under the AUTHENTICATION AND AUTHORIZATION container in order to create a new Group. Give it the name 'manager' (without the quotes, all lowercase) and leave the rest as it is, then save.
+   - Now that you have created a superuser, start the development server again and log into the admin section (localhost:8000/admin). Once logged in, click the "+add" button under the AUTHENTICATION AND AUTHORIZATION container in order to create a new Group. Give it the name 'manager' (without the quotes, all lowercase) and leave the rest as it is, then save.
 
    - Now let's create the managers. Go ahead and create two new users from the admin interface. Once created,
    go and edit each of them to make sure the following is true:
@@ -70,18 +70,10 @@ Now that your app is up and running, stop the development server and let's start
      * The user should have the First Name & Last Name fields set
      * The user should be assigned to the manager group
 
-After these steps, your application should be ready for use. The users you just created (managers) represent the married couple: they can approve/refuse photos uploaded and accept/deny new users requests.
+After these steps, your application should be ready for use. The users you just created (managers) represent the married couple: they can approve/refuse photos uploaded by other users and accept/deny new users requests.
 
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
+## Website Behavior
 
 Explain what these tests test and why
 
@@ -89,36 +81,15 @@ Explain what these tests test and why
 Give an example
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+* [Django](https://www.djangoproject.com/) - Django
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Rodolfo Queiroz** - *Initial work* - [DjangoImageGallery](https://github.com/rqroz/django_image_gallery)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
