@@ -1,6 +1,7 @@
 from django import forms
 from website.models import UploadedImage, User, UserData
 
+# ----------------------------------------- LOGIN -----------------------------------------------
 class LoginForm(forms.Form):
     username = forms.EmailField(
         label='E-mail',
@@ -23,6 +24,8 @@ class LoginForm(forms.Form):
             )
         )
 
+
+# -------------------------------------- GALLERY ORDERING -----------------------------------------
 class GalleryOrderingForm(forms.Form):
     DATE_TAKEN = 'date_taken'
     NUMBER_OF_LIKES = 'likes'
@@ -44,6 +47,7 @@ class GalleryOrderingForm(forms.Form):
     order = forms.ChoiceField(choices=ORDERING_CHOICES, widget=forms.widgets.Select(attrs={'class':'form-control'}))
 
 
+# ---------------------------------------- REQUEST ACCESS -----------------------------------------
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
@@ -60,6 +64,8 @@ class UserForm(forms.ModelForm):
             'password': forms.PasswordInput(attrs={'placeholder': '**********'}),
         }
 
+
+# ---------------------------------------- USER'S PROFILE -----------------------------------------
 class UpdateUserForm(UserForm):
     def __init__(self, *args, **kwargs):
         super(UpdateUserForm, self).__init__(*args, **kwargs)
@@ -70,7 +76,7 @@ class UserDataForm(forms.ModelForm):
         model = UserData
         fields = ('profile_picture',)
 
-
+# ------------------------------------------ SEARCH ----------------------------------------------
 class SearchForm(forms.Form):
     search = forms.CharField(
         min_length=1,

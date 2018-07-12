@@ -8,6 +8,9 @@ from website.paths import *
 from website.validators import *
 
 class UserData(models.Model):
+    """
+        Represents user's extra information (data) not presented in Django's default User model.
+    """
     user = models.OneToOneField(User, related_name="data", on_delete=models.CASCADE)
     profile_picture = models.ImageField(blank=True, null=True, upload_to=url_user_img)
 
@@ -15,6 +18,10 @@ class UserData(models.Model):
         return self.user.username
 
 class UploadedImage(models.Model):
+    """
+        Represents the image object that will contain each image uploaded by the users.
+    """
+
     PENDING = 'Pending'
     REFUSED = 'Refused'
     ACCEPTED = 'Accepted'
@@ -59,6 +66,9 @@ class UploadedImage(models.Model):
 
 
 class ImageLike(models.Model):
+    """
+        Holds the relation between a user and the image they liked
+    """
     liked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(UploadedImage, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True, editable=False)
@@ -69,8 +79,11 @@ class ImageLike(models.Model):
 
 # Deleting files from storage when database object is deleted
 @receiver(pre_delete, sender=UploadedImage)
-@receiver(pre_delete, sender=UserData)
 def img_post_delete(sender, instance, **kwargs):
     # Pass false so that FileField deletes the file but doesn't save the model.
     instance.upload.delete(False)
     instance.thumbnail.delete(False)
+
+@receiver(pre_delete, sender=UserData)
+def img_post_delete(sender, instance, **kwargs):
+    instance.profile_picture.delete(False)
