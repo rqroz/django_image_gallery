@@ -124,7 +124,7 @@ After these steps, your application should be ready for use. The users you just 
   Finally, there is a basic profile section that allows the users to change their personal data and password.
 
   <div align="center">
-    <img width="400" alt="User Profile" src="/example-files/imgs/user-profile.png">
+    <img width="600" alt="User Profile" src="/example-files/imgs/user-profile.png">
   </div>
 
 ## Built With
