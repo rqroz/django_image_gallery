@@ -81,7 +81,7 @@ After these steps, your application should be ready for use. The users you just 
 
   **Managers**: To accept/deny a new user, click on your name (right side of the navbar), then click the Approve Users button to be taken to the users approval section.
 
-  **Note**: When someone requests access, there is a message saying that an email will be sent if the managers accept their request. That is NOT implemented. That is for you to implement based on your preferred SMTP module. Bellow is a link to the django docs.
+  **Note**: When someone requests access, there is a message saying that an email will be sent if the managers accept their request. That is NOT implemented. That is for you to implement (edit [UserApprovalView](/image_gallery/website/views/user_views.py)) based on your preferred SMTP module. Bellow is a link to the django docs.
   - [Django SMTP](https://docs.djangoproject.com/en/2.0/topics/email/)
 
 - Uploads
