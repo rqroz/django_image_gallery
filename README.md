@@ -100,6 +100,7 @@ After these steps, your application should be ready for use. The users you just 
 
   ![gallery page](/example-files/imgs/user-uploads.pngwidth =400x262 )
   ![gallery page](/example-files/imgs/photo-approval.png =400x195 )
+  <img width="400" alt="Photo Approval" src="/example-files/imgs/photo-approval.png">
 
 ### Gallery
 
