@@ -37,7 +37,7 @@ Before starting the server, you'll need to install all the dependencies and prec
 
 After following the steps above, you should see the screen bellow on your localhost (http://127.0.0.1:8000/):
 
-    ![landing page](/example-files/imgs/landing.png)
+![landing page](/example-files/imgs/landing.png)
 
 ## Running the tests
 
