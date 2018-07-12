@@ -76,6 +76,10 @@ Now that your app is up and running, stop the development server and let's start
      * The user should have the First Name & Last Name fields set
      * The user should be assigned to the manager group
 
+3. Logout from Admin
+   - With the managers created, log out from the admin and start using the application with the managers account.
+
+
 After these steps, your application should be ready for use. The users you just created (managers) represent the married couple: they can approve/refuse photos uploaded by other users and accept/deny new users requests.
 
 
