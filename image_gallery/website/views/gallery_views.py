@@ -16,23 +16,12 @@ class GalleryView(ListView):
 
     def get_queryset(self):
         queryset = UploadedImage.objects.filter(status=UploadedImage.ACCEPTED)
-        print(queryset[0])
         order = '-' if self.descending else ''
         if self.order_by == GalleryOrderingForm.DATE_TAKEN:
             return queryset.order_by(order+'date_taken')
         elif self.order_by == GalleryOrderingForm.NUMBER_OF_LIKES:
-            q = queryset.extra(select = {
-                                    'likes' :
-                                        """
-                                            SELECT COUNT(*)
-                                            FROM website_uploadedimage
-                                            JOIN website_imagelike on website_imagelike.image_id = website_uploadedimage.id
-                                            WHERE website_imagelike.image_id = website_uploadedimage.id
-                                        """
-                                }).order_by(order+'likes')
-            for w in q:
-                print("%s has %d likes"%(w.pk, w.likes))
-            return q
+            return queryset.annotate(likes=Count('imagelike')).order_by(order+'likes')
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
