@@ -31,7 +31,7 @@ class StatusView(ListView):
     """
     paginate_by = 10
     status_form = UploadStatusForm
-    status = UploadedImage.PENDING
+    status = UploadedImage.ACCEPTED
 
     def replace_status(self, temp_status):
         if temp_status is None: return
