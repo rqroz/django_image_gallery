@@ -85,8 +85,8 @@ After these steps, your application should be ready for use. The users you just 
   - [Django SMTP](https://docs.djangoproject.com/en/2.0/topics/email/)
 
   <div style="dislpay:--webkit-inline-box;">
-    <img height="246" alt="User Request" src="/example-files/imgs/user-request.png">
-    <img height="246" alt="User Approval" src="/example-files/imgs/user-approval.png">
+    <img height="220" alt="User Request" src="/example-files/imgs/user-request.png">
+    <img height="220" alt="User Approval" src="/example-files/imgs/user-approval.png">
   </div>
 
 ### Search (Manager's only)
