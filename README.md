@@ -21,13 +21,15 @@ $ git clone https://github.com/rqroz/django_image_gallery.git
 Before starting the server, you'll need to install all the dependencies and preconfigure your environment variables.
 
 1. Installing Dependencies
-   - To install the project dependencies, move to the project folder and run:
+
+   To install the project dependencies, move to the project folder and run:
    ```
    $ pip3 install -r requirements.txt
    ```
 
 2. Environment Variables
-   - This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
+
+   This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
 
 3. Applying Migrations
 
@@ -38,7 +40,8 @@ Before starting the server, you'll need to install all the dependencies and prec
    ```
 
 4. Starting the development server
-   - Now that you've done all the pre-configuration needed, go ahead and run the command bellow from the folder containing the manage.py file:
+
+   Now that you've done all the pre-configuration needed, go ahead and run the command bellow from the folder containing the manage.py file:
    ```
    $ ./manage.py runserver
    ```
@@ -52,6 +55,22 @@ After following the steps above, you should see the screen bellow on your localh
 Now that your app is up and running, stop the development server and let's start configuring the manager users (the users representing the couple who just married).
 
 1. Create a superuser
+
+   If you haven't done so yet, go ahead and create a superuser so you can have access to the admin section.
+   ```
+   $ ./manage.py createsuperuser
+   ```
+
+2. Create the manager group & users
+   - Now that you have created a superuser, start the development server again and log in into the admin section (localhost/admin). Once logged in, click the "+add" button under the AUTHENTICATION AND AUTHORIZATION container in order to create a new Group. Give it the name 'manager' (without the quotes, all lowercase) and leave the rest as it is, then save.
+
+   - Now let's create the managers. Go ahead and create two new users from the admin interface. Once created,
+   go and edit each of them to make sure the following is true:
+     * The user's username and email must be the same
+     * The user should have the First Name & Last Name fields set
+     * The user should be assigned to the manager group
+
+After these steps, your application should be ready for use. The users you just created (managers) represent the married couple: they can approve/refuse photos uploaded and accept/deny new users requests.
 
 
 ### Break down into end to end tests
