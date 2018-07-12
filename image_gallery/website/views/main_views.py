@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 class IndexView(View):
+    """
+        Index View
+        Displays the landing page if the user is annonymous, otherwise redirects to Gallery View.
+    """
     template_name = 'website/index.html'
 
     def get(self, request, *args, **kwargs):
@@ -15,6 +19,11 @@ class IndexView(View):
 
 @method_decorator([login_required, manager_only], name='dispatch')
 class SearchView(ListView):
+    """
+        Search View
+        Displays the result of a search query on users
+        Fields Searched: First Name and Last Name
+    """
     template_name = 'website/search.html'
     paginate_by = 10
 

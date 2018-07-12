@@ -19,7 +19,12 @@ from io import BytesIO
 import os
 
 @method_decorator([csrf_protect, login_required], name='dispatch')
-class UserProfile(DetailView):
+class UserProfileView(DetailView):
+    """
+        User Profile View
+        GET: Displays user information and extra data on a form for editing.
+        POST: Updates user non sensible information.
+    """
     model = User
     template_name = 'website/user/user_profile.html'
     form = UpdateUserForm
@@ -63,6 +68,10 @@ class UserProfile(DetailView):
 
 @method_decorator([csrf_protect, login_required], name='dispatch')
 class UpdatePasswordView(View):
+    """
+        User Password View
+        Updates user's password.
+    """
     def post(self, request, *args, **kwargs):
         form = PasswordChangeForm(user=request.user, data=request.POST)
         is_valid = form.is_valid()
@@ -79,6 +88,11 @@ class UpdatePasswordView(View):
 
 @method_decorator([csrf_protect, login_required, manager_only], name='dispatch')
 class UserApprovalView(ListView):
+    """
+        User Approval View
+        GET: Displays a list of (inactive) users who've requested access
+        POST: Activates or Deletes a list of unactive users
+    """
     template_name = 'website/user/user_approval.html'
     paginate_by = 10
     success_url = reverse_lazy('website:user_approval_view')
@@ -102,6 +116,11 @@ class UserApprovalView(ListView):
 
 @method_decorator([login_required, csrf_protect], name='dispatch')
 class UserUploadsView(SingleObjectMixin, StatusView):
+    """
+        User Uploads View
+        GET: Displays all the images uploaded by a certain user, filtering by the images status.
+        POST: Creates a new UploadedImage object with the information provided.
+    """
     template_name = "website/user/user_uploads.html"
     form = UploadedImageForm
 
@@ -124,6 +143,9 @@ class UserUploadsView(SingleObjectMixin, StatusView):
         return self.object.uploadedimage_set.filter(status=self.status).order_by('-date_taken')
 
     def get_proper_dimensions(self, width, height, max=600):
+        """
+            retrieves corrected width and height (keeping ratio) of a PIL image based on max parameter
+        """
         ratio = min(max/width, max/height)
         new_width = int(width*ratio)
         new_height = int(height*ratio)
@@ -131,6 +153,14 @@ class UserUploadsView(SingleObjectMixin, StatusView):
         return new_width, new_height
 
     def rotate_image(self, image):
+        """
+            Some images are not taken in the "normal" (horizontal) position. For these images,
+            PIL opens them in the orientation that it should have been taken.
+            For example, if the image in question was taken vertically, PIL will create the image
+            in horizontal as it should be the "default" position.
+            Since we do not want to rotate these images, we have to read their Orientation attribute
+            and rotate them back accordingly so we get the image in the original orientation.
+        """
         try:
             exif=dict((ExifTags.TAGS[k], v) for k, v in image._getexif().items() if k in ExifTags.TAGS)
         except:
@@ -151,6 +181,10 @@ class UserUploadsView(SingleObjectMixin, StatusView):
         return image
 
     def create_low_quality_img(self, img_data):
+        """
+            From a given image, this method creates a smaller, lower quality copy sample,
+            returning an object that is readable by Django's file save method.
+        """
         img = Image.open(img_data)
         img_width, img_height = img.size
         new_width, new_height = self.get_proper_dimensions(img_width, img_height)
@@ -163,6 +197,12 @@ class UserUploadsView(SingleObjectMixin, StatusView):
         return ContentFile(img_bytes.getvalue())
 
     def post(self, request, *args, **kwargs):
+        """
+            This will create a new UploadedImage object if the data in request.POST is valid.
+            It will create a lower quality copy of the image that is uploaded in order to save it
+            in the thumbnail attribute of the object. That is so the views that load mulitple images
+            are not loaded with heavy data.
+        """
         form = self.form(request.POST, request.FILES)
         context = {'success': False}
 
