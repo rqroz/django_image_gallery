@@ -8,7 +8,7 @@ from .main_views import StatusView
 
 @method_decorator([login_required], name='dispatch')
 class GalleryView(ListView):
-    paginate_by = 100
+    paginate_by = 2
     template_name = 'website/gallery/gallery.html'
     form = GalleryOrderingForm
     order_by = GalleryOrderingForm.DATE_TAKEN
@@ -27,6 +27,9 @@ class GalleryView(ListView):
         context = super().get_context_data(**kwargs)
         order = GalleryOrderingForm.DESCENDING if self.descending else GalleryOrderingForm.ASCENDING
         context['form'] = self.form(initial={'sort_by':self.order_by, 'order': order})
+
+        simulation = self.request.GET.get('simulate-large-data')
+        context['repeat'] = 100 if simulation else 1
         return context
 
     def get(self, request, *args, **kwargs):

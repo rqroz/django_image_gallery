@@ -35,3 +35,7 @@ def get_user_image_url(user):
         return user.data.profile_picture.url
     except:
         return '/static/website/img/default_user_icon.png'
+
+@register.filter
+def makelist(upperBound):
+    return list(range(upperBound))

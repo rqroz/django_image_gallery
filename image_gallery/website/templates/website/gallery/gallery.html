@@ -24,6 +24,12 @@
       </div>
     </form>
   </div>
+  <div class="col-md-4 text-right">
+    <a href="?simulate-large-data=true" class="btn btn-danger"
+      data-toggle="popover" data-trigger="hover" data-placement="left" title="Simulate Large Data" data-content="By cliking this button you will render the first page of the gallery with 100x its original content. If you've done this and want to revert, just click the gallery button on the navbar.">
+      SLG
+    </a>
+  </div>
 </div>
 <hr/>
 <div class="row">
@@ -31,9 +37,11 @@
     {% if page_obj %}
       <div class="free-wall">
         {% for ui in page_obj %}
+          {% for i in repeat|makelist %}
           <div class="item">
             {% include 'website/gallery/gallery_thumbnail.html' with custom_class='item-full' %}
           </div>
+          {% endfor %}
         {% endfor %}
       </div>
     {% else %}

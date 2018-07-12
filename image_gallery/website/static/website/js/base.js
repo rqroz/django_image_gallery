@@ -61,7 +61,7 @@ $(function(){
       }
     })
     wall.fitWidth();
-  })
+  });
 
   $(window).trigger("resize");
 
