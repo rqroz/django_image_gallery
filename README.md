@@ -35,7 +35,7 @@ Before starting the server, you'll need to install all the dependencies and prec
    $ ./manage.py runserver
    ```
   If you navigate to http://127.0.0.1:8000/, you should see the screen bellow:
-    ![landing page](/example-files/img/landing.png)
+    ![landing page](/example-files/imgs/landing.png)
 
 ## Running the tests
 
