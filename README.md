@@ -21,16 +21,23 @@ $ git clone https://github.com/rqroz/django_image_gallery.git
 Before starting the server, you'll need to install all the dependencies and preconfigure your environment variables.
 
 1. Installing Dependencies
-   - To install the project dependencies, move to the project folder and run:
+   To install the project dependencies, move to the project folder and run:
    ```
    $ pip3 install -r requirements.txt
    ```
 
 2. Environment Variables
-   - This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
+   This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
 
-3. Starting the development server
-   - Now that you've done all the pre-configuration needed, go ahead and run the command bellow from the folder containing the manage.py file:
+3. Applying Migrations
+   After configuring your environment variables, go ahead and apply the migrations to your database.
+   ```shell
+   $ ./manage.py makemigrations
+   $ ./manage.py migrate
+   ```
+
+4. Starting the development server
+   Now that you've done all the pre-configuration needed, go ahead and run the command bellow from the folder containing the manage.py file:
    ```
    $ ./manage.py runserver
    ```
@@ -39,9 +46,12 @@ After following the steps above, you should see the screen bellow on your localh
 
 ![landing page](/example-files/imgs/landing.png)
 
-## Running the tests
+## Website Configuration
 
-Explain how to run the automated tests for this system
+Now that your app is up and running, stop the development server and let's start configuring the manager users (the users representing the couple who just married).
+
+1. Create a superuser
+
 
 ### Break down into end to end tests
 
