@@ -8,6 +8,14 @@ from .main_views import StatusView
 
 @method_decorator([login_required], name='dispatch')
 class GalleryView(ListView):
+    """
+        Gallery View
+        Displays all approved images with correct ordering.
+
+        Note: The 'repeat' context key is for development purposes only. It is used to generate
+              100x the content of the first page of the gallery so the developer can check the
+              performance of the view without having to actually upload such number of images.
+    """
     paginate_by = 100
     template_name = 'website/gallery/gallery.html'
     form = GalleryOrderingForm
@@ -39,8 +47,14 @@ class GalleryView(ListView):
             self.descending = order_form.cleaned_data['order'] == 'desc'
         return super().get(request, *args, **kwargs)
 
+
 @method_decorator([login_required, csrf_protect, manager_only], name='dispatch')
 class PhotoApprovalView(StatusView):
+    """
+        Photo Approval View
+        GET: Displays all the images uploaded filtering by its status.
+        POST: Changes the status of images and redirect back to the same page with the previous GET parameters.
+    """
     template_name = 'website/gallery/photo_approval.html'
     success_url = reverse_lazy('website:photo_approval_view')
     paginate_by = 10
@@ -77,6 +91,10 @@ class PhotoApprovalView(StatusView):
 
 @method_decorator([login_required, csrf_protect], name='dispatch')
 class ImageLikeView(View):
+    """
+        Image Like View
+        Creates a User-Image (ImageLike) relation to represent the like.
+    """
     def post(self, request, *args, **kwargs):
         uploaded_image = get_object_or_404(UploadedImage, pk=request.POST.get('pk'))
         data = uploaded_image.like(request.user)

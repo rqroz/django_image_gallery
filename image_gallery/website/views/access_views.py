@@ -7,7 +7,12 @@ from django.db.models import Q
 from website.models import UserData
 
 class AnonymousFormView(View):
+    """
+        Base View for anonymous users.
+        Its main behavior is to redirect logged users to its success url (set on children).
+    """
     form = None
+    success_url = None
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated: return redirect(self.success_url)
@@ -18,6 +23,10 @@ class AnonymousFormView(View):
 
 @method_decorator(csrf_protect, name='dispatch')
 class AuthView(AnonymousFormView):
+    """
+        Auth View
+        Performs user login and redirects to GET's next parameter if needed.
+    """
     template_name = 'website/landing/login.html'
     form = LoginForm
     success_url = reverse_lazy('website:index_view')
@@ -41,11 +50,20 @@ class AuthView(AnonymousFormView):
 
 @login_required
 def logout_view(request):
+    """
+        Logout View
+        Performs user logout
+    """
     logout(request)
     return redirect(reverse_lazy('website:index_view'))
 
 @method_decorator(csrf_protect, name='dispatch')
 class RequestAcessView(AnonymousFormView):
+    """
+        Request Access View
+        Saves a new inactive user on the database. This user will later be activated or deleted
+        depending on managers decision.
+    """
     template_name = 'website/landing/request_access.html'
     form = UserForm
     success_url = reverse_lazy('website:index_view')
