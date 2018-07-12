@@ -110,17 +110,20 @@ After these steps, your application should be ready for use. The users you just 
 
 ### Gallery
 
-  - The Gallery is the main section: all users have access to it and it shows all the approved photos.
+  The Gallery is the main section: all users have access to it and it shows all the approved photos.
+
   - Users can like images here (hovering over an image will show the options to like and view in original size).
   - Users can sort the images either by number of likes or by date taken. It is also possible to change the ordering (ascending/descending).
 
-  - **LARGE DATA SIMULATION**: You might notice a little red button on the right side of the gallery page with the initials SLG (Simulate Large Data). That button is for development only, its purpose is to show how the gallery will behave with 100x the data it contains in the first page (if you uploaded 2 images and click this button, the first page of the gallery will show 200 images, 100 of each).
+  **LARGE DATA SIMULATION**: You might notice a little red button on the right side of the gallery page with the initials SLG (Simulate Large Data). That button is for development only, its purpose is to show how the gallery will behave with 100x the data it contains in the first page (if you uploaded 2 images and click this button, the first page of the gallery will show 200 images, 100 of each).
 
   ![gallery page](/example-files/imgs/gallery.png)
 
 ### Profile
 
   Finally, there is a basic profile section that allows the users to change their personal data and password.
+
+  ![profile page](/example-files/imgs/user-profile.png)
 
 ## Built With
 
