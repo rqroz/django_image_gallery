@@ -84,6 +84,11 @@ After these steps, your application should be ready for use. The users you just 
   **Note**: When someone requests access, there is a message saying that an email will be sent if the managers accept their request. That is NOT implemented. That is for you to implement ([UserApprovalView](/image_gallery/website/views/user_views.py)) based on your preferred SMTP module. Bellow is a link to the django docs.
   - [Django SMTP](https://docs.djangoproject.com/en/2.0/topics/email/)
 
+  <div style="dislpay:--webkit-inline-box;">
+    <img height="246" alt="User Request" src="/example-files/imgs/user-request.png">
+    <img height="246" alt="User Approval" src="/example-files/imgs/user-approval.png">
+  </div>
+
 ### Search (Manager's only)
 
   Managers can search their friends (other users) by their names to see which photos they uploaded. The search bar is located in the navbar so they can search from all pages.
@@ -98,10 +103,10 @@ After these steps, your application should be ready for use. The users you just 
 
   **Managers**: To change the status of an image, click on your name (right side of the navbar), then click the Approve Photos button to be taken to the photo approval section. There, you will be able to change the status of all uploaded photos.
 
-  <center><div style="dislpay:--webkit-inline-box;">
+  <div style="dislpay:--webkit-inline-box;">
     <img height="246" alt="User Uploads" src="/example-files/imgs/user-uploads.png">
     <img height="246" alt="Photo Approval" src="/example-files/imgs/gallery-approval.png">
-  </div></center>
+  </div>
 
 ### Gallery
 
