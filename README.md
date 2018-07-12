@@ -30,7 +30,8 @@ Before starting the server, you'll need to install all the dependencies and prec
    - This project contains an example of environment file named '.env.example', go ahead and change the values to the ones matching your needs, then change its name to '.env' (the project won't run if you skip this step).
 
 3. Applying Migrations
-   - After configuring your environment variables, go ahead and apply the migrations to your database.
+
+   After configuring your environment variables, go ahead and apply the migrations to your database.
    ```
    $ ./manage.py makemigrations
    $ ./manage.py migrate
