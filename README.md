@@ -103,7 +103,7 @@ After these steps, your application should be ready for use. The users you just 
 
   **Managers**: To change the status of an image, click on your name (right side of the navbar), then click the Approve Photos button to be taken to the photo approval section. There, you will be able to change the status of all uploaded photos.
 
-  <div style="dislpay:--webkit-inline-box;">
+  <div style="dislpay:--webkit-inline-box;" align="center">
     <img height="246" alt="User Uploads" src="/example-files/imgs/user-uploads.png">
     <img height="246" alt="Photo Approval" src="/example-files/imgs/gallery-approval.png">
   </div>
@@ -123,7 +123,9 @@ After these steps, your application should be ready for use. The users you just 
 
   Finally, there is a basic profile section that allows the users to change their personal data and password.
 
-  ![profile page](/example-files/imgs/user-profile.png)
+  <div align="center">
+    <img width="400" alt="User Profile" src="/example-files/imgs/user-profile.png">
+  </div>
 
 ## Built With
 
