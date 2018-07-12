@@ -55,7 +55,7 @@
                       <div class="row">
                         <div class="col-md-12 text-center">
                           <div class="btn-group status-group" data-toggle="buttons">
-                            <label class="btn btn-success {% if ui.status == 'Accepted' %}active{% endif %}">
+                            <label class="btn btn-success btn-radio {% if ui.status == 'Accepted' %}active{% endif %}">
                               <input type="radio" name="{{ui.pk}}" value="Accepted" {% if ui.status == 'Accepted' %}checked{% endif %}> Accepted
                             </label>
                             <label class="btn btn-warning {% if ui.status == 'Pending' %}active{% endif %}">

@@ -8,7 +8,7 @@ from .main_views import StatusView
 
 @method_decorator([login_required], name='dispatch')
 class GalleryView(ListView):
-    paginate_by = 2
+    paginate_by = 100
     template_name = 'website/gallery/gallery.html'
     form = GalleryOrderingForm
     order_by = GalleryOrderingForm.DATE_TAKEN

@@ -117,7 +117,21 @@ form input {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.input-invalid {
+form .btn-group .btn-success.active {
+  color: #fff;
+  background-color: #449d44 !important;
+  border-color: #398439;
+}
+
+form .btn-group .btn-warning.active {
+    color: #fff;
+    background-color: #f0ad4e !important;
+    border-color: #eea236;
+}
+
+form .btn-group .btn-danger.active {
+  color: #fff;
+  background-color: #d9534f !important;
   border-color: #d43f3a;
 }
 

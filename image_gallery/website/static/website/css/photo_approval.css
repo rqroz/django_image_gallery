@@ -33,21 +33,3 @@
   -moz-border-radius: 10px;
   margin: 0 auto;
 }
-
-.status-group .btn-success .active {
-  color: #fff;
-  background-color: #449d44 !important;
-  border-color: #398439;
-}
-
-.status-group .btn-warning .active {
-    color: #fff;
-    background-color: #f0ad4e !important;
-    border-color: #eea236;
-}
-
-.status-group .btn-danger .active {
-  color: #fff;
-  background-color: #d9534f !important;
-  border-color: #d43f3a;
-}
