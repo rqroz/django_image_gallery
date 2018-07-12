@@ -13,8 +13,12 @@ $ git clone https://github.com/rqroz/django_image_gallery.git
 
 ### Prerequisites
 
+To start with this application, you will only need the following:
+
 - python3
 - pip3
+
+Other dependencies will be installed by pip3 in the next section.
 
 ### Installing
 
