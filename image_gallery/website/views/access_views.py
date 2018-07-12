@@ -59,7 +59,7 @@ class RequestAcessView(AnonymousFormView):
             new_user.username = new_user.email
             new_user.is_active = False
             new_user.save()
-            messages.success(request, 'Your request was place. When approved, we will send you a confirmation email.')
+            messages.success(request, 'Your request was place. When approved, we will send you a confirmation email.<br/>(Not Really as this is for testing purposes, but you get the ideia...)')
             return redirect(self.success_url)
         else:
             context = { 'form': form }
