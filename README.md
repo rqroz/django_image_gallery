@@ -1,6 +1,6 @@
 # django_image_gallery
 
-This is a web application written in Django used to serva as a basis for a collaborative wedding album web app.
+This is a web application written in Django used to serve as a basis for a collaborative wedding album web app.
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ $ git clone https://github.com/rqroz/django_image_gallery.git
 
 
 ### Prerequisites
-**Required**
+
 Behore starting the server, you'll need to install all the dependencies and preconfigure your environment variables.
 
 1. Installing Dependencies
