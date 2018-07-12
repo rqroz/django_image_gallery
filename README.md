@@ -84,11 +84,11 @@ Give an example
 
 ## Built With
 
-* [Django](https://www.djangoproject.com/) - Django
+* [Django](https://www.djangoproject.com/)
 
 ## Authors
 
-* **Rodolfo Queiroz** - *Initial work* - [DjangoImageGallery](https://github.com/rqroz/django_image_gallery)
+* **Rodolfo Queiroz** - [DjangoImageGallery](https://github.com/rqroz/django_image_gallery)
 
 ## License
 
